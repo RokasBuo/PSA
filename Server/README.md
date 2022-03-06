@@ -1,4 +1,4 @@
-# PSA
+# stud-tools
 software architecture class project
 
 # running

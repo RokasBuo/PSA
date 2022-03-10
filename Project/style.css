@@ -18,6 +18,11 @@ body {
     position: fixed;
     background-color: black;
     color: white;
+    font-size: 30px;
+}
+
+.white{
+    color: white;
 }
 
 .page-name{

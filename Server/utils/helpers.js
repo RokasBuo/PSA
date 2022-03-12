@@ -30,7 +30,7 @@ function getDailyQuote(date, quotes) {
 }
 
 async function loadQuotes(app) {
-    fs.readFile("quotes.json", "utf-8", (err, data) => {
+    fs.readFile(appRoot+"/quotes.json", "utf-8", (err, data) => {
         if(err) throw err;
         const quotes = JSON.parse(data);
         app.locals.quotes = quotes;

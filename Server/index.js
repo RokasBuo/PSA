@@ -5,10 +5,12 @@ const express = require("express");
 const app = express();
 const db = require('./utils/db');
 const passport = require('passport');
-const { loadQuotes } = require('./utils/utils');
+const { loadQuotes } = require('./utils/helpers');
 const fs = require('fs');
 require('./utils/auth');
 app.use(express.json());
+
+global.appRoot = path.resolve(__dirname);
 
 // TODO: set session secret
 app.use(session({

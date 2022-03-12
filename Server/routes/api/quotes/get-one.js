@@ -1,4 +1,4 @@
-const { getDailyQuote } = require('../../../utils/utils');
+const { getDailyQuote } = require('../../../utils/helpers');
 const userQuotes = require('../../../models/user_quotes')
 module.exports = function (app) {
     app.get("/quote", async (req, res) => {

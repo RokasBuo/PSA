@@ -22,14 +22,6 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get("/", async (req, res) => {
-    if (req.user) {
-        return res.send(req.user);
-    }
-
-    res.send("yep");
-});
-
 processRoutePath(__dirname + "/routes");
 
 function processRoutePath(route_path) {

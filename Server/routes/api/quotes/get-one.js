@@ -1,5 +1,5 @@
 const { getDailyQuote } = require('../../../utils/helpers');
-const userQuotes = require('../../../models/user_quotes')
+const userQuotes = require('../../../models/user_quotes');
 module.exports = function (app) {
     app.get("/quote", async (req, res) => {
         if (!req.user) return res.status(401).json({ error: true, message: "You must be logged in"});
@@ -15,10 +15,11 @@ module.exports = function (app) {
             },
             user: req.user._id
         }, (err, doc) => {
+            console.log(err, doc);
             if (err) throw err;
-            if (doc) { return res.json(doc); }
+            if (doc) { return res.json({success: true, quote: doc.quote, author: req.user.username }); }
             const quote = getDailyQuote(now, app.locals.quotes);
-            res.json(quote);
+            res.json({success: true, ...quote});
         });
     });
 };

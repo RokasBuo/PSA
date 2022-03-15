@@ -1,32 +1,39 @@
 <html>
-    <head>
-        <link rel="stylesheet" href="styles/style.css">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;1,100&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital@1&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
-        <script src="https://kit.fontawesome.com/1b20b6c512.js" crossorigin="anonymous"></script>
-    </head>
-    <body>
-        <div class="sidebar border">
-            <ul class="nav-list">
-                <li class="nav-item"> <i class="fas fa-home white"></i></li>
-                <li class="nav-item"><i class="fas fa-sticky-note white"></i></li>
-                <li class="nav-item"><i class="fas fa-clipboard-list white"></i></li>
-                <li class="nav-item"><i class="fas fa-calculator white"></i></li>
-                <li class="nav-item"><i class="fas fa-clock white"></i></li>
-              </ul>  
+
+<head>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;1,100&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital@1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/1b20b6c512.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/calculator.js" defer></script>
+</head>
+
+<body>
+    <div class="sidebar border">
+        <ul class="nav-list">
+            <li class="nav-item"> <i class="fas fa-home white"></i></li>
+            <li class="nav-item"><i class="fas fa-sticky-note white"></i></li>
+            <li class="nav-item"><i class="fas fa-clipboard-list white"></i></li>
+            <li class="nav-item"><i class="fas fa-calculator white"></i></li>
+            <li class="nav-item"><i class="fas fa-clock white"></i></li>
+        </ul>
+    </div>
+    <div class="content border">
+        <div class="page-name border ">
+            <h1>Calculator</h1>
         </div>
-        <div class="content border">
-            <div class="page-name border ">
-                <h1>Calculator</h1>
-            </div>
-            <div class="content-text border">
-                <input type="text" placeholder="Calculate " id="calculator" class="input-style"> 
-            </div>
+        <div class="content-text border">
+            <form method="post" action="#">
+                <input type="text" placeholder="Calculate" name="input" id="calculator" class="input-style">
+            </form>
         </div>
-        
-    </body>
+    </div>
+
+</body>
+
 </html>

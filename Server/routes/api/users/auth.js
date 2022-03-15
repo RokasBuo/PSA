@@ -17,8 +17,14 @@ module.exports = function (app) {
                     password: hashedPassword,
                     email: req.body.email,
                 });
-                await user.save();
-                res.status(201).json({ success: true });
+                try {
+                    await user.save();
+                    res.status(201).json({ success: true });
+                }
+                catch(err) {
+                    const prettyErrors = Object.values(err.errors).map(e => e.properties.message).join("\n");
+                    res.status(400).json({ error: true, message: prettyErrors });
+                }
             }
         );
     });

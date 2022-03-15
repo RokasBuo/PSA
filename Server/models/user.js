@@ -7,7 +7,7 @@ const schema = new Schema({
         type: Boolean,
         default: false,
     },
-    username: { type: String, required: true },
+    username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     // https://stackoverflow.com/questions/18022365/mongoose-validate-email-syntax
     email: {

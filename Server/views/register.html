@@ -1,30 +1,37 @@
 <html>
-    <head>
-        <link rel="stylesheet" href="styles/registerstyle.css">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;1,100&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital@1&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
-        <script src="https://kit.fontawesome.com/1b20b6c512.js" crossorigin="anonymous"></script>
-    </head>
-    <body>
-        <div class="container">
-            <div class="leftside">
-                <h1 class="maintext">Novus</h1>
-                <h3 class="secondtext"><b>new</b> way of studying</h3>
-                <img src="img/plane.svg" alt="plane" class="plane">
-            </div>
-            <div class="rightside">
-                <h2 class="thirdtext">Sign-up</h2>
-                <input type="text" name="username" id="username" class="username" placeholder="E-mail"><br>
+
+<head>
+    <link rel="stylesheet" href="styles/registerstyle.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;1,100&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital@1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/1b20b6c512.js" crossorigin="anonymous"></script>
+    <script src="js/register.js" defer type="text/javascript"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="leftside">
+            <h1 class="maintext">Novus</h1>
+            <h3 class="secondtext"><b>new</b> way of studying</h3>
+            <img src="img/plane.svg" alt="plane" class="plane">
+        </div>
+        <div class="rightside">
+            <h2 class="thirdtext">Sign-up</h2>
+            <form method="POST" action="/users/signup">
+                <input type="text" name="email" id="email" class="username" placeholder="E-mail"><br>
                 <input type="text" name="username" id="username" class="username" placeholder="Username"><br>
                 <input type="password" name="password" id="password" class="password" placeholder="Password"><br>
-                <input type="password" name="password" id="password" class="password" placeholder="Repeat Password"><br>
+                <input type="password" name="repeat_password" id="password" class="password" placeholder="Repeat Password"><br>
                 <input type="submit" value="Sign up" class="submit"><br>
-                <a href="/login" class="register">Already have an account</a>
-            </div>
+            </form>
+            <a href="/login" class="register">Already have an account</a>
         </div>
-    </body>
+    </div>
+</body>
+
 </html>

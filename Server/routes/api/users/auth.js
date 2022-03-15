@@ -4,7 +4,9 @@ const User = require('../../../models/user');
 
 module.exports = function (app) {
     app.post('/users/signup', function (req, res) {
-        if (!req.body.email || !req.body.password || !req.body.username) return res.status(400).json({ error: true, message: "Bad request" });
+        console.log(req.body);
+        if (!req.body.email || !req.body.password || !req.body.username) return res.status(400).json({ error: true, message: "Missing details in request." });
+        if(req.body.password != req.body.repeat_password) return res.status(400).json({ error: true, message: "Passwords must match."});
         User.findOne({ $or: [{ username: req.body.username }, { email: req.body.email }] },
             async (err, doc) => {
                 if (err) throw err;

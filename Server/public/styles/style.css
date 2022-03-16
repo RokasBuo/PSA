@@ -10,6 +10,7 @@ body {
   display: flex;
   flex-direction: column;
   margin-left: 5rem;
+  align-items: center;
 }
 
 .sidebar {
@@ -90,6 +91,16 @@ body {
   margin-left: 2rem;
 }
 
+.calc-input-style {
+  text-align: center;
+  padding: 20px;
+  width: 20rem;
+  font-size: 1.5rem;
+  height: 75px;
+  border-radius: 1rem;
+  margin-bottom: 60px;
+}
+
 .button-style {
   height: 2.1rem;
   width: 3.1rem;
@@ -117,7 +128,118 @@ body {
 }
 
 @media only screen and (max-height: 1000px) {
-  .font-pacifico {
-    margin-bottom: 0;
+    .font-pacifico {
+        margin-bottom: 0;
+    }
+}
+
+
+@media only screen and (max-height: 860px) {
+  .nav-list li a i {
+    margin-bottom: 20px;
+    color: white;
+    font-size: 25px;
+    padding: 6px;
+  }
+  
+  .nav-list li a i:hover {
+    color: #d3d3d3;
+  }
+  
+  .nav-list-bottom li a i {
+    margin-bottom: 25px;
+    color: white;
+    font-size: 25px;
+  }
+  
+  .nav-list-bottom li a i:hover {
+    color: #d3d3d3;
+  }
+  
+  .nav-list-bottom {
+    list-style-type: none;
+    justify-content: end;
+    margin-top: auto;
+    padding: 0;
+    font-size: 30px;
+  }
+
+  .font-pacifico { 
+    font-size: 45px;
+  }
+}
+
+/* Table */
+
+table {
+  border: 3px solid black;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 30%;
+  table-layout: fixed;
+  font-size: 18px;
+}
+
+table caption {
+  font-size: 1.5em;
+  margin: .5em 0 .75em;
+  font-family: Montserrat;
+}
+
+table tr {
+  background-color: white;
+  border: 3px solid black;
+  padding: .35em;
+}
+
+table td {
+  padding: 1em;
+  text-align: center;
+}
+
+@media screen and (max-width: 600px) {
+  table {
+    border: 0;
+    width: 60%;
+  }
+
+  table caption {
+    font-size: 1.3em;
+  }
+  
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  
+  table tr {
+    display: block;
+    margin-bottom: .625em;
+    border-radius: 15px;
+  }
+  
+  table td {
+    border-radius: 15px;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+  }
+  
+  table td::before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  table td:last-child {
+    border-bottom: 0;
   }
 }

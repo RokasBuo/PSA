@@ -14,13 +14,13 @@
 </head>
 
 <body>
-    <div class="sidebar border">
+    <div class="sidebar">
         <h3 class="font-pacifico">N</h3>
         <ul class="nav-list">
-            <li class="nav-item"><a href="/"><i class="fas fa-home"></i></a> </li>
+            <li class="nav-item"><a href="index.html"><i class="fas fa-home"></i></a> </li>
             <li class="nav-item"><a href="notes.html"><i class="fas fa-sticky-note"></i></a></li>
             <li class="nav-item"><a href="todo.html"><i class="fas fa-clipboard-list"></i></a></li>
-            <li class="nav-item"><a href="/calculator"><i class="fas fa-calculator"></i></a></li>
+            <li class="nav-item"><a href="calculator.html"><i class="fas fa-calculator"></i></a></li>
             <li class="nav-item"><a href="clock.html"><i class="fas fa-clock"></i></a></li>
             <li class="nav-item"><a href="game.html"><i class="fas fa-gamepad"></i></a></li>
             <li class="nav-item"><a href="schedule.html"><i class="fas fa-calendar"></i></a></li>
@@ -35,15 +35,32 @@
         </ul>
 
     </div>
-    <div class="content border">
-        <div class="page-name border ">
+    <div class="content">
+        <div class="page-name ">
             <h1>Calculator</h1>
         </div>
-        <div class="content-text border">
+        <div class="content-text">
             <form method="post" action="#">
-                <input type="text" placeholder="Calculate" name="input" id="calculator" class="input-style">
+                <input type="text" placeholder="Calculate" name="input" id="calculator" class="calc-input-style">
             </form>
         </div>
+        <table>
+            <caption>History</caption>
+            <tbody>
+              <tr>
+                <td data-label="Input: ">3 * 2 + 6 - 25</td>
+              </tr>
+              <tr>
+                <td scope="row" data-label="Input: ">3 * 2 + 6 - 25</td>
+              </tr>
+              <tr>
+                <td scope="row" data-label="Input: ">3 * 2 + 6 - 25</td>
+              </tr>
+              <tr>
+                <td scope="row" data-label="Input: ">3 * 2 + 6 - 25</td>
+              </tr>
+            </tbody>
+          </table>
     </div>
 
 </body>

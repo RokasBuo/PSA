@@ -4,7 +4,7 @@
     const quote = await fetch('/quote').then(response => response.json()).catch(e => console.error);
     console.log(quote);
     if (quote.success) {
-        quote_el.innerHTML = `${quote.quote} &mdash; ${quote.author}`;
+        quote_el.innerHTML = `<q>${quote.quote}</q> &mdash; ${quote.author}`;
     }
 
     form.addEventListener("submit", async e => {
@@ -22,7 +22,7 @@
         console.log(response);
         
         if(response.success) {
-            quote_el.innerHTML = `${response.quote} &mdash; ${response.author}`;
+            quote_el.innerHTML = `<q>${response.quote}</q> &mdash; ${response.author}`;
         } else {
             alert(`Something went wrong.\nError: ${response.message}`);
         }

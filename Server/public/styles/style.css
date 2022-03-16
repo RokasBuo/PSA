@@ -110,9 +110,14 @@ body {
   font-size: 55px;
 }
 
+#quote {
+  max-width: 55vw;
+  word-wrap: break-word;
+  margin: 0 auto;
+}
 
 @media only screen and (max-height: 1000px) {
-    .font-pacifico {
-        margin-bottom: 0;
-    }
+  .font-pacifico {
+    margin-bottom: 0;
+  }
 }

@@ -22,8 +22,6 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-processRoutePath(__dirname + "/routes");
-
 function processRoutePath(route_path) {
     fs.readdirSync(route_path).forEach(function(file) {
         var filepath = route_path + '/' + file;
@@ -38,18 +36,24 @@ function processRoutePath(route_path) {
     });
 }
 
+function log(...data) {
+    data = data.join(" ");
+    console.log(`[${new Date().toISOString()}] ${data}`);
+}
 
 app.use(express.static(path.join(__dirname, 'public')));
 
 (async () => {
-    console.log("connecting to db...");
+    processRoutePath(__dirname + "/routes");
+
+    log("connecting to db...");
     const connection = await db.connect();
-    console.log("connected!");
-    console.log("loading quotes...");
+    log("connected!");
+    log("loading quotes...");
     loadQuotes(app);
-    console.log("loaded!");
-    console.log("starting server...");
+    log("loaded!");
+    log("starting server...");
     await app.listen(config.port);
 
-    console.log(`[${new Date().toISOString()}] web server active on port ${config.port}. http://localhost:${config.port}`);
+    log(`web server active on port ${config.port}. http://localhost:${config.port}`);
 })();

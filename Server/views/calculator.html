@@ -39,28 +39,27 @@
         <div class="page-name ">
             <h1>Calculator</h1>
         </div>
+        <h1 id="answer"></h1>
         <div class="content-text">
             <form method="post" action="#">
                 <input type="text" placeholder="Calculate" name="input" id="calculator" class="calc-input-style">
             </form>
         </div>
-        <table>
-            <caption>History</caption>
-            <tbody>
-              <tr>
-                <td data-label="Input: ">3 * 2 + 6 - 25</td>
-              </tr>
-              <tr>
-                <td scope="row" data-label="Input: ">3 * 2 + 6 - 25</td>
-              </tr>
-              <tr>
-                <td scope="row" data-label="Input: ">3 * 2 + 6 - 25</td>
-              </tr>
-              <tr>
-                <td scope="row" data-label="Input: ">3 * 2 + 6 - 25</td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="wrapper">
+            <table class="table-bordered">
+                <caption>History</caption>
+                <tbody>
+                    <tr>
+                        <td data-label="Input: ">No calculations yet...</td>
+                    </tr>
+                    
+                </tbody>
+                <tfoot>
+                    <button id="previousPage">&lt; Previous page</button>
+                    <button id="nextPage">Next page &gt;</button>
+                </tfoot>
+            </table>
+        </div>
     </div>
 
 </body>

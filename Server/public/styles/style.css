@@ -128,11 +128,10 @@ body {
 }
 
 @media only screen and (max-height: 1000px) {
-    .font-pacifico {
-        margin-bottom: 0;
-    }
+  .font-pacifico {
+    margin-bottom: 0;
+  }
 }
-
 
 @media only screen and (max-height: 860px) {
   .nav-list li a i {
@@ -141,21 +140,21 @@ body {
     font-size: 25px;
     padding: 6px;
   }
-  
+
   .nav-list li a i:hover {
     color: #d3d3d3;
   }
-  
+
   .nav-list-bottom li a i {
     margin-bottom: 25px;
     color: white;
     font-size: 25px;
   }
-  
+
   .nav-list-bottom li a i:hover {
     color: #d3d3d3;
   }
-  
+
   .nav-list-bottom {
     list-style-type: none;
     justify-content: end;
@@ -164,50 +163,66 @@ body {
     font-size: 30px;
   }
 
-  .font-pacifico { 
+  .font-pacifico {
     font-size: 45px;
   }
 }
 
 /* Table */
-
-table {
-  border: 3px solid black;
-  border-collapse: collapse;
-  margin: 0;
-  padding: 0;
+.wrapper {
+  overflow: auto;
+  border-radius: 15px;
   width: 30%;
-  table-layout: fixed;
-  font-size: 18px;
+  border: 3px solid black;
+  margin-bottom: 50px;
 }
 
 table caption {
   font-size: 1.5em;
-  margin: .5em 0 .75em;
+  margin: 0.5em 0 0.75em;
   font-family: Montserrat;
+  border-bottom: 3px solid black;
+  padding-bottom: 10px; /* fix for weird spacing if using caption border */
+}
+
+/* fix for weird spacing if using caption border */
+table tr:first-child td {
+  padding-top: 0px;
 }
 
 table tr {
-  background-color: white;
-  border: 3px solid black;
-  padding: .35em;
+  padding: 0.35em;
+  text-align: center;
+  cursor: pointer;
 }
 
-table td {
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+  border-style: hidden;
+  width: 100%;
+  max-width: 100%;
+}
+
+th,
+td {
   padding: 1em;
-  text-align: center;
+  border: 3px solid black;
 }
 
 @media screen and (max-width: 600px) {
+  .wrapper {
+    width: 70%;
+  }
   table {
     border: 0;
-    width: 60%;
   }
 
   table caption {
     font-size: 1.3em;
+    border: 0;
   }
-  
+
   table thead {
     border: none;
     clip: rect(0 0 0 0);
@@ -218,28 +233,32 @@ table td {
     position: absolute;
     width: 1px;
   }
-  
+
   table tr {
     display: block;
-    margin-bottom: .625em;
-    border-radius: 15px;
+    padding: 0;
+    margin-bottom: 0.625em;
+    /* border-radius: 15px; */
   }
-  
+
   table td {
-    border-radius: 15px;
+    /* border-radius: 15px; */
     display: block;
-    font-size: .8em;
+    font-size: 0.8em;
+    border: 0;
+    border-bottom: 3px solid black;
     text-align: right;
+    padding: 1em 0;
   }
-  
+
   table td::before {
     content: attr(data-label);
     float: left;
     font-weight: bold;
     text-transform: uppercase;
   }
-  
-  table td:last-child {
+
+  table tr:last-child td {
     border-bottom: 0;
   }
 }

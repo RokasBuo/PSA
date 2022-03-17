@@ -1,5 +1,10 @@
 (async () => {
     const form = document.querySelector("form");
+    const messageEl = document.getElementById("message");
+    if(window.location.search == "?register_success") {
+        messageEl.innerHTML = "Register successful, you can now log in";
+    }
+
 
     form.addEventListener("submit", async e => {
         e.preventDefault();

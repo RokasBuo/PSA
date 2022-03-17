@@ -24,8 +24,9 @@
             <p id="message"></p>
             <form method="post" action="/login">
                 <h2 class="thirdtext">Log In</h2>
-                <input type="text" name="username" id="username" class="username" required placeholder="Username"><br>
-                <input type="password" name="password" id="password" class="password" required placeholder="Password"><br>
+                <div id="errors" class="text-error"></div>
+                <input type="text" required name="username" id="username" class="username" required placeholder="Username"><br>
+                <input type="password" required name="password" id="password" class="password" required placeholder="Password"><br>
                 <input type="submit" value="Log In" class="submit"><br>
             </form>
             <a href="/register" class="register">Create a new account</a>

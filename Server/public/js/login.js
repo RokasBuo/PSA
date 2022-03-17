@@ -1,6 +1,8 @@
 (async () => {
     const form = document.querySelector("form");
     const messageEl = document.getElementById("message");
+    const errorsEl = document.getElementById("errors");
+ 
     if(window.location.search == "?register_success") {
         messageEl.innerHTML = "Register successful, you can now log in";
     }
@@ -22,7 +24,7 @@
             window.location.replace("/");
         }
         if(response.error) {
-            alert(response.message);
+            errorsEl.innerHTML = response.message;
             return;
         }
     });

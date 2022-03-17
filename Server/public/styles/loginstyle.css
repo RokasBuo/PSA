@@ -84,3 +84,7 @@
   justify-content: left;
   padding-top: 100px;
 }
+.text-error {
+  color: red;
+  margin-bottom: 10px;
+}

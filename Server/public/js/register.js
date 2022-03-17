@@ -1,5 +1,12 @@
 (async () => {
     const form = document.querySelector("form");
+    const inputs = [...document.querySelectorAll("input")];
+    const errorsEl = document.getElementById("errors");
+    inputs.forEach(input => {
+        input.addEventListener("input", (e) => {
+            input.classList.remove("input-error");
+        });
+    });
 
     form.addEventListener("submit", async e => {
         e.preventDefault();
@@ -15,10 +22,15 @@
         console.log(response);
         if(response.success) {
             //better yet show a "success, you can now log in message".
-            window.location.replace("/login");
+            window.location.replace("/login?register_success");
         }
         if(response.error) {
-            alert(response.message);
+            errorsEl.innerHTML = response.message;
+            response.fields.forEach(field => {
+                if(field) { // field can come as null and return an error.
+                    document.getElementById(field).classList.add("input-error");
+                }
+            });
             return;
         }
     });

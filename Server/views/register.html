@@ -22,11 +22,12 @@
         </div>
         <div class="rightside">
             <h2 class="thirdtext">Sign-up</h2>
+            <div id="errors" class="text-error"></div>
             <form method="POST" action="/users/signup">
-                <input type="text" name="email" id="email" class="username" placeholder="E-mail"><br>
-                <input type="text" name="username" id="username" class="username" placeholder="Username"><br>
-                <input type="password" name="password" id="password" class="password" placeholder="Password"><br>
-                <input type="password" name="repeat_password" id="password" class="password" placeholder="Repeat Password"><br>
+                <input type="email" required name="email" id="email" class="username" placeholder="E-mail"><br>
+                <input type="text" required name="username" id="username" class="username" placeholder="Username"><br>
+                <input type="password" required name="password" id="password" class="password" placeholder="Password"><br>
+                <input type="password" required name="repeat_password" id="repeat_password" class="password" placeholder="Repeat Password"><br>
                 <input type="submit" value="Sign up" class="submit"><br>
             </form>
             <a href="/login" class="register">Already have an account</a>

@@ -5,39 +5,17 @@ const answerEl = document.getElementById("answer");
 const previousPage = document.getElementById("previousPage");
 const nextPage = document.getElementById("nextPage");
 const pageNum = document.getElementById("pageNum");
+const okBttn = document.getElementById("ok");
+const neverBttn = document.getElementById("never");
+const todayBttn = document.getElementById("today");
 const perPage = 10;
 let currentPage = 1;
 
-nextPage.addEventListener("click", () => {
-    if(currentPage+1 > Math.ceil(history.inputs.length / perPage)) {
-        return;
-    }
-    drawTable(++currentPage);
-    // show the current page somewhere
-});
-
-previousPage.addEventListener("click", () => {
-    if(currentPage-1 < 1) {
-        return;
-    }
-    drawTable(--currentPage);
-    // show the current page somwhere
-});
-
-
-function getStorage() {
-    const json = window.localStorage.getItem("history");
-    const data = JSON.parse(json);
-    return data;
+function resetStorage() {
+    history = { inputs: [], results: [] };
+    saveStorage("history", history);
+    drawTable(1);
 }
-
-function saveStorage() {
-    const json = JSON.stringify(history);
-    window.localStorage.setItem("history", json);
-    return true;
-}
-
-let history = getStorage() || { inputs: [], results: [] };
 
 function generateCellHTML(input, result) {
     return `<tr onclick="tdClickHandler('${input}', '${result}')">
@@ -73,12 +51,67 @@ function drawTable(page) {
     tbody.innerHTML = generateTableHTML(page);
 }
 
-drawTable(currentPage);
 
-function resetStorage() {
-    history = { inputs: [], results: [] };
-    saveStorage();
-    drawTable(1);
+let history = getStorage("history") || { inputs: [], results: [] };
+
+let modalPrefs = getStorage("modalPrefs") || { hide: 0 };
+
+okBttn.addEventListener('click', e => {
+    hideModal();
+});
+
+todayBttn.addEventListener('click', e => {
+    //get start of next day
+    const now = new Date();
+    now.setDate(now.getDate() + 1);
+    now.setHours(0);
+    now.setMinutes(0);
+    now.setSeconds(0);
+    now.setMilliseconds(0);
+
+    modalPrefs.hide = now.getTime();
+    saveStorage("modalPrefs", modalPrefs);
+    hideModal();
+});
+
+neverBttn.addEventListener('click', e => {
+    const now = new Date();
+    now.setYear(9999);
+
+    modalPrefs.hide = now.getTime();
+    saveStorage("modalPrefs", modalPrefs);
+    hideModal();
+});
+
+inputEl.addEventListener("paste", e => {
+    console.log("pasted!");
+    console.log(modalPrefs.hide, Date(), modalPrefs.hide > Date());
+    if (modalPrefs.hide < (new Date()).getTime()) {
+
+        showModal();
+        e.preventDefault();
+    }
+});
+
+
+nextPage.addEventListener("click", () => {
+    if (currentPage + 1 > Math.ceil(history.inputs.length / perPage)) {
+        return;
+    }
+    drawTable(++currentPage);
+    // show the current page somewhere
+});
+
+previousPage.addEventListener("click", () => {
+    if (currentPage - 1 < 1) {
+        return;
+    }
+    drawTable(--currentPage);
+    // show the current page somwhere
+});
+
+if (history.inputs.length > 0) {
+    drawTable(currentPage);
 }
 
 form.addEventListener("submit", e => {
@@ -92,5 +125,5 @@ form.addEventListener("submit", e => {
     history.results.push(result);
     answer.innerHTML = result;
     drawTable(currentPage);
-    saveStorage();
+    saveStorage("history", history);
 });

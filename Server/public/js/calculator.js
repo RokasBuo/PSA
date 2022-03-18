@@ -4,6 +4,7 @@ const inputEl = document.querySelector("input");
 const answerEl = document.getElementById("answer");
 const previousPage = document.getElementById("previousPage");
 const nextPage = document.getElementById("nextPage");
+const pageNum = document.getElementById("pageNum");
 const perPage = 10;
 let currentPage = 1;
 
@@ -40,7 +41,7 @@ let history = getStorage() || { inputs: [], results: [] };
 
 function generateCellHTML(input, result) {
     return `<tr onclick="tdClickHandler('${input}', '${result}')">
-        <td data-label="Input: ">${input}</td>
+        <td data-label="Input: ">${input} = ${result}</td>
     </tr>`;
 }
 
@@ -68,6 +69,7 @@ function tdClickHandler(input, result) {
 
 function drawTable(page) {
     console.log("page:", page);
+    pageNum.innerHTML = page;
     tbody.innerHTML = generateTableHTML(page);
 }
 

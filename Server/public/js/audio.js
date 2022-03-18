@@ -17,10 +17,10 @@ let elapsedTimeInterval;
 micBttn.addEventListener("click", startAudioRecording);
 
 
-function stopRecording() { 
+async function stopRecording() {
     console.log("Stopping");
 
-    audioRecorder.stop()
+    const audio = await audioRecorder.stop()
         .then(audio => {
             saveAudio(audio);
             playAudio(audio);
@@ -37,8 +37,15 @@ function stopRecording() {
         });
 }
 
-function saveAudio(audio) {
-    console.log(audio);
+async function saveAudio(audio) {
+    console.log("saving");
+    const form = new FormData();
+    form.append('file', audio);
+    const resp = await fetch('/audio', {
+        method: "POST",
+        body: form,
+      }).then(res => res.json());
+    console.log(resp);
 }
 
 stopRecordingBttn.addEventListener("click", e => {
@@ -96,7 +103,7 @@ function startAudioRecording() {
                 console.log("To record audio, use browsers like Chrome and Firefox.");
                 overlay.classList.remove("hide");
             }
-            
+
             switch (error.name) {
                 case 'AbortError': //error from navigator.mediaDevices.getUserMedia
                     console.log("An AbortError has occured.");

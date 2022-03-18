@@ -10,6 +10,9 @@
 
     form.addEventListener("submit", async e => {
         e.preventDefault();
+        [...document.querySelectorAll(".input-error")].forEach(input => {
+            input.classList.remove("input-error");
+        });
         const formData = new FormData(form);
         const data = Object.fromEntries(formData);
         const response = await fetch('/users/signup', {

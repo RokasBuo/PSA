@@ -45,21 +45,27 @@
                 <input type="text" placeholder="Calculate" name="input" id="calculator" class="calc-input-style">
             </form>
         </div>
-        <div class="wrapper">
-            <table class="table-bordered">
-                <caption>History</caption>
-                <tbody>
-                    <tr>
-                        <td data-label="Input: ">No calculations yet...</td>
-                    </tr>
-                    
-                </tbody>
-                <tfoot>
-                    <button id="previousPage">&lt; Previous page</button>
-                    <button id="nextPage">Next page &gt;</button>
-                </tfoot>
-            </table>
+        <h2>History</h2>
+        <div class="history-table">
+            <div class="pagination">
+                <button id="previousPage" class="paginationBttn"><i class="fas fa-chevron-left"></i> Back</button>
+                <div id="pageNum">
+                </div>
+                <button id="nextPage" class="paginationBttn">Next <i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="wrapper">
+                <table class="table-bordered">
+
+                    <tbody>
+                        <tr>
+                            <td data-label="Input: ">No calculations yet...</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
         </div>
+
     </div>
 
 </body>

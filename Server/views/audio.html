@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/audio.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;1,100&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital@1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/1b20b6c512.js" crossorigin="anonymous"></script>
+  
+</head>
+
+<body>
+    <div class="sidebar">
+        <h3 class="font-pacifico">N</h3>
+        <ul class="nav-list">
+            <li class="nav-item"><a href="/"><i class="fas fa-home"></i></a> </li>
+            <li class="nav-item"><a href="notes.html"><i class="fas fa-sticky-note"></i></a></li>
+            <li class="nav-item"><a href="todo.html"><i class="fas fa-clipboard-list"></i></a></li>
+            <li class="nav-item"><a href="/calculator"><i class="fas fa-calculator"></i></a></li>
+            <li class="nav-item"><a href="clock.html"><i class="fas fa-clock"></i></a></li>
+            <li class="nav-item"><a href="game.html"><i class="fas fa-gamepad"></i></a></li>
+            <li class="nav-item"><a href="schedule.html"><i class="fas fa-calendar"></i></a></li>
+            <li class="nav-item"><a href="budget.html"><i class="fas fa-money-bill"></i></a></li>
+            <li class="nav-item"><a href="/audio"><i class="fas fa-music"></i></a></li>
+            <li class="nav-item"><a href="cards.html"><i class="fas fa-brain"></i></a></li>
+        </ul>
+
+        <ul class="nav-list-bottom">
+            <li class="nav-item"><a href=""><i class="fas fa-user"></i></a></li>
+            <li class="nav-item"><a href="/users/logout"><i class="fas fa-sign-out-alt"></i></a></li>
+        </ul>
+
+    </div>
+    <div class="content">
+        <div class="page-name ">
+            <h1>Audio-Memos</h1>
+        </div>
+        <i class="start-recording-button fa fa-microphone" aria-hidden="true"></i>
+        <div class="recording-contorl-buttons-container hide">
+            <i class="cancel-recording-button fa fa-times-circle-o" aria-hidden="true"></i>
+            <div class="recording-elapsed-time">
+                <i class="red-recording-dot fa fa-circle" aria-hidden="true"></i>
+                <p class="elapsed-time"></p>
+            </div>
+            <i class="stop-recording-button fa fa-stop-circle-o" aria-hidden="true"></i>
+        </div>
+        <div class="text-indication-of-audio-playing-container">
+            <p class="text-indication-of-audio-playing hide">Audio is playing<span>.</span><span>.</span><span>.</span></p>
+        </div>
+    </div>
+    <div class="overlay hide">
+        <div class="browser-not-supporting-audio-recording-box">
+            <p>To record audio, use browsers like Chrome and Firefox that support audio recording.</p>
+            <button type="button" class="close-browser-not-supported-box">Ok.</button>
+        </div>
+    </div>
+
+    <audio controls class="audio-element hide">
+    </audio>
+
+    <script src="js/audio.js"></script>
+</body>
+
+</html>

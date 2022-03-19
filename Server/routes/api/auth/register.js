@@ -35,7 +35,7 @@ module.exports = function (app) {
 
         User.findOne({ $or: [{ username: req.body.username }, { email: req.body.email }] },
             async (err, doc) => {
-                if (err) throw err;
+                if (err) return res.status(500).json({ error: true, message: err.message });
                 if (doc) {
                     const fields = [doc.username == req.body.username ? 'username' : null, doc.email == req.body.email ? 'email' : null];
                     return res.status(400).json({ error: true, fields: fields, message: "User already exists" });

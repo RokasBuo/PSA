@@ -1,7 +1,10 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
+    <meta charset="utf-8">
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/audio.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -10,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital@1&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/1b20b6c512.js" crossorigin="anonymous"></script>
-    <script src="js/dashboard.js" defer type="text/javascript"></script>
+  
 </head>
 
 <body>
@@ -37,22 +40,35 @@
     </div>
     <div class="content">
         <div class="page-name ">
-            <h1>What's on your <br>mind today ? </h1>
-
+            <h1>Audio-Memos</h1>
         </div>
-        <div class="input-result">
-            <h2 class="temp" id="quote">"No quote today yet,<br> tell us what's on your mind"</h2>
+        <i class="start-recording-button fa fa-microphone" aria-hidden="true"></i>
+        <div class="recording-contorl-buttons-container hide">
+            <i class="cancel-recording-button fa fa-times-circle-o" aria-hidden="true"></i>
+            <div class="recording-elapsed-time">
+                <i class="red-recording-dot fa fa-circle" aria-hidden="true"></i>
+                <p class="elapsed-time"></p>
+            </div>
+            <i class="stop-recording-button fa fa-stop-circle-o" aria-hidden="true"></i>
         </div>
-        <div class="content-text">
-            <form method="POST" action="/quote" id="create-quote">
-                <input type="text" placeholder="Daily motivational quote " id="quote-input" class="input-style" name="quote">
-                <button type="submit" class="button-style">
-                    <i class="fas fa-arrow-alt-circle-right"></i>
-                </button>
-            </form>
+        <div class="text-indication-of-audio-playing-container">
+            <p class="text-indication-of-audio-playing hide">Audio is playing<span>.</span><span>.</span><span>.</span></p>
+        </div>
+        <div id="memoContainer">
         </div>
     </div>
 
+    <div class="overlay hide">
+        <div class="browser-not-supporting-audio-recording-box">
+            <p>To record audio, use browsers like Chrome and Firefox that support audio recording.</p>
+            <button type="button" class="close-browser-not-supported-box">Ok.</button>
+        </div>
+    </div>
+
+    <audio controls class="audio-element hide">
+    </audio>
+
+    <script src="js/audio.js"></script>
 </body>
 
 </html>

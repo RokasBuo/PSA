@@ -9,14 +9,14 @@ const schema = new Schema({
         ref: 'User',
     },
     filename: {
-        type: String
-    },
-    length: {
-        type: String
+        type: String,
     },
     date: {
         type: Date,
         default: new Date(),
+    },
+    filetype: {
+        type: String,
     },
 });
 

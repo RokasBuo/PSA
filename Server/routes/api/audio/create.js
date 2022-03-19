@@ -7,7 +7,7 @@ module.exports = function (app) {
         if (!req.user) return res.status(401).json({ error: true, message: "You must be logged in" });
         const upload = multer({
             dest: `public/uploads/audio/${req.user._id}/`,
-            limits: { fileSize: 100000 }
+            limits: { fileSize: 102400 }
         }).single('file');
         upload(req, res, err => {
             console.log("FILE", req.file, req.body);

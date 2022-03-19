@@ -8,7 +8,7 @@ const overlay = document.querySelector(".overlay");
 const audioEl = document.querySelector(".audio-element");
 let audioElSrc = document.querySelector(".audio-element > source");
 const playingIndicator = document.querySelector(".text-indication-of-audio-playing");
-
+const memoContainer = document.getElementById("memoContainer");
 
 let recordStartTime;
 const MAX_RECORDING_LENGTH_SECONDS = 5;
@@ -23,7 +23,7 @@ function stopRecording() {
     audioRecorder.stop()
         .then(audio => {
             saveAudio(audio);
-            playAudio(audio);
+          //  playAudio(audio);
             hideRecordBttns();
         })
         .catch(error => {
@@ -38,16 +38,18 @@ function stopRecording() {
 }
 
 async function saveAudio(audio) {
-    console.log("saving", );
+    console.log("saving", audio);
     const length = (new Date().getTime() - recordStartTime.getTime());
     const form = new FormData();
     form.append('file', audio);
     form.append('length', length);
+    form.append('filetype', audio.type.split(";")[0]);
     const resp = await fetch('/audio', {
         method: "POST",
         body: form,
-      }).then(res => res.json());
+    }).then(res => res.json());
     console.log(resp);
+    addMemoToContainer(resp);
 }
 
 stopRecordingBttn.addEventListener("click", e => {
@@ -321,10 +323,39 @@ const audioRecorder = {
     }
 };
 
+async function deleteMemo(filename, el) {
+    const res = await fetch("/audio-memos", {
+        method: "DELETE",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({filename})
+    }).then(res => res.json());
+    console.log(el);
+    if(res.success) {
+        el.parentElement.remove();
+    }
+}
+
+async function addMemoToContainer(memo) {
+    memoContainer.innerHTML += `
+        <div class="card audio-memo">
+            ${memo.filename}<br/>
+            ${memo.date}<br/>
+            <audio controls>
+                <source src="uploads/audio/${memo.user}/${memo.filename}" type="${memo.filetype}">
+            </audio>
+            <span onclick="deleteMemo('${memo.filename}', this)">DELETE</span>
+        </div>
+    `;
+    return;
+}
 
 async function getMemos() {
-    const list = await fetch("/audio-memos").then(res => res.json());
-    list.forEach(memo => {
-        memoContainer.innerHTML += `<div id="${memo.id}" class="audio-memo">${memo.filename}</div>`;
-    });
+    const res = await fetch("/audio-memos").then(res => res.json());
+    const list = res.list.filter(f => f.length);
+    console.log(list);
+    list.forEach(memo => addMemoToContainer(memo));
 }
+
+getMemos();

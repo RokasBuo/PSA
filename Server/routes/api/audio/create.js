@@ -15,11 +15,12 @@ module.exports = function (app) {
                 user: req.user._id,
                 filename: req.file.filename,
                 length: req.body.length,
+                filetype: req.body.filetype,
             });
             if (!req.file) return res.status(400).json({ error: true, message: "no valid file specified" });
             try {
                 audio.save();
-                return res.status(200).json({ success: true, id: audio._id, filename: req.file.filename, length: req.body.length });
+                return res.status(200).json({ success: true, user: req.user._id, date:audio.date, id: audio._id, filename: req.file.filename, length: req.body.length, filetype: req.body.filetype });
             } catch (err) {
                 const prettyErrors = Object.values(err.errors).map(e => e.properties.message).join("\n");
                 return res.status(400).json({ error: true, message: prettyErrors });

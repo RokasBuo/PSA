@@ -7,7 +7,7 @@ module.exports = function (app) {
             console.log(err, doc);
             if (err) return res.status(500).json({ error: true, message: err.message });
             const list = doc.map(d => {
-                return { user: d.user, filename: d.filename, length: d.length, id: d._id, date: d.date };
+                return { user: d.user, filename: d.filename, length: d.length, id: d._id, date: d.date, filetype: d.filetype };
             });
             res.json({ success: true, list });
         });

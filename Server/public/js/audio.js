@@ -44,12 +44,15 @@ async function saveAudio(audio) {
     form.append('file', audio);
     form.append('length', length);
     form.append('filetype', audio.type.split(";")[0]);
-    const resp = await fetch('/audio', {
+    const res = await fetch('/audio', {
         method: "POST",
         body: form,
     }).then(res => res.json());
-    console.log(resp);
-    addMemoToContainer(resp);
+    console.log(res);
+    if(res.error) {
+        return alert(res.message);
+    }
+    addMemoToContainer(res);
 }
 
 stopRecordingBttn.addEventListener("click", e => {
@@ -353,7 +356,7 @@ async function addMemoToContainer(memo) {
 
 async function getMemos() {
     const res = await fetch("/audio-memos").then(res => res.json());
-    const list = res.list.filter(f => f.length);
+    const list = res.list;
     console.log(list);
     list.forEach(memo => addMemoToContainer(memo));
 }

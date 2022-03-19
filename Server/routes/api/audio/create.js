@@ -7,17 +7,17 @@ module.exports = function (app) {
         if (!req.user) return res.status(401).json({ error: true, message: "You must be logged in" });
         const upload = multer({
             dest: `public/uploads/audio/${req.user._id}/`,
-            limits: { fileSize: 30000 } // TODO: figure out a reasonable fileSize limit
+            limits: { fileSize: 100000 }
         }).single('file');
         upload(req, res, err => {
             console.log("FILE", req.file, req.body);
+            if (!req.file) return res.status(400).json({ error: true, message: "no valid file specified" });
             const audio = new model({
                 user: req.user._id,
                 filename: req.file.filename,
                 length: req.body.length,
                 filetype: req.body.filetype,
             });
-            if (!req.file) return res.status(400).json({ error: true, message: "no valid file specified" });
             try {
                 audio.save();
                 return res.status(200).json({ success: true, user: req.user._id, date:audio.date, id: audio._id, filename: req.file.filename, length: req.body.length, filetype: req.body.filetype });

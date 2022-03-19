@@ -11,8 +11,15 @@ module.exports = function (app) {
             if (!doc.deletedCount) {
                 return res.status(404).json({ error: true, message: "Nothing to delete" });
             }
-            const deletion = await fs.unlink(path.join(appRoot + `/public/uploads/audio/${req.user._id}/${body.filename}`));
-            console.log(deletion);
+            
+            try {
+                const deletion = await fs.unlink(path.join(appRoot + `/public/uploads/audio/${req.user._id}/${body.filename}`));
+                console.log(deletion);
+            } catch(err) {
+                console.error(err);
+            }
+
+            
             res.json({ success: true, doc });
         });
     });

@@ -10,7 +10,14 @@ const schema = new Schema({
     },
     filename: {
         type: String
-    }
+    },
+    length: {
+        type: String
+    },
+    date: {
+        type: Date,
+        default: new Date(),
+    },
 });
 
 module.exports = mongoose.model('audio_memos', schema);

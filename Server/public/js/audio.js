@@ -17,10 +17,10 @@ let elapsedTimeInterval;
 micBttn.addEventListener("click", startAudioRecording);
 
 
-async function stopRecording() {
+function stopRecording() {
     console.log("Stopping");
 
-    const audio = await audioRecorder.stop()
+    audioRecorder.stop()
         .then(audio => {
             saveAudio(audio);
             playAudio(audio);
@@ -38,9 +38,11 @@ async function stopRecording() {
 }
 
 async function saveAudio(audio) {
-    console.log("saving");
+    console.log("saving", );
+    const length = (new Date().getTime() - recordStartTime.getTime());
     const form = new FormData();
     form.append('file', audio);
+    form.append('length', length);
     const resp = await fetch('/audio', {
         method: "POST",
         body: form,
@@ -318,3 +320,11 @@ const audioRecorder = {
         audioRecorder.streamBeingCaptured = null;
     }
 };
+
+
+async function getMemos() {
+    const list = await fetch("/audio-memos").then(res => res.json());
+    list.forEach(memo => {
+        memoContainer.innerHTML += `<div id="${memo.id}" class="audio-memo">${memo.filename}</div>`;
+    });
+}

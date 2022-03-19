@@ -13,7 +13,6 @@ nextPage.addEventListener("click", () => {
         return;
     }
     drawTable(++currentPage);
-    // show the current page somewhere
 });
 
 previousPage.addEventListener("click", () => {
@@ -21,7 +20,6 @@ previousPage.addEventListener("click", () => {
         return;
     }
     drawTable(--currentPage);
-    // show the current page somwhere
 });
 
 
@@ -87,6 +85,8 @@ form.addEventListener("submit", e => {
     let input = formData.get("input");
     const cleanInput = input.replaceAll("^", "**");
     console.log(input, cleanInput);
+    // prevent pasting event
+    // add warning for pasting
     const result = eval(cleanInput);
     history.inputs.push(input);
     history.results.push(result);

@@ -24,7 +24,6 @@
         }).then(response => response.json());
         console.log(response);
         if(response.success) {
-            //better yet show a "success, you can now log in message".
             window.location.replace("/login?register_success");
         }
         if(response.error) {

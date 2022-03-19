@@ -29,8 +29,8 @@ module.exports = function (app) {
             ERROR_MESSAGES.push("Passwords must match");
         }
 
-        if(ERROR_FIELDS.length > 0) {
-            return res.status(400).json({error: true, fields: ERROR_FIELDS, message: ERROR_MESSAGES.join("<br/>")});
+        if (ERROR_FIELDS.length > 0) {
+            return res.status(400).json({ error: true, fields: ERROR_FIELDS, message: ERROR_MESSAGES.join("<br/>") });
         }
 
         User.findOne({ $or: [{ username: req.body.username }, { email: req.body.email }] },

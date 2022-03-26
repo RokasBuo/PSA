@@ -44,7 +44,7 @@ const generateTaskHTML = (data) => {
     return el;
 };
 
-fetch("/api/todo/").then(res => res.json()).then(data => {
+fetch("/todo/").then(res => res.json()).then(data => {
     data.result.forEach(task => {
         const el = generateTaskHTML(task);
         todo_list.appendChild(el);

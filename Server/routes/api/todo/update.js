@@ -1,5 +1,5 @@
 const xssFilters = require('xss-filters');
-const Todo = require('../../models/todo');
+const Todo = require('../../../models/todo');
 
 module.exports = (app) => {
     app.patch('/todo', (req, res) => {

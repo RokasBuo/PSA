@@ -1,5 +1,5 @@
 const xssFilters = require('xss-filters');
-const Todo = require('../../models/todo');
+const Todo = require('../../../models/todo');
 module.exports = (app) => {
     app.post('/todo', (req, res) => {
         if (!req.user) return res.status(401).json({ error: true, message: "You must be logged in" });

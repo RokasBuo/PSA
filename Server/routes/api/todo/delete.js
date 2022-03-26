@@ -1,4 +1,4 @@
-const Todo = require('../../models/todo');
+const Todo = require('../../../models/todo');
 
 module.exports = (app) => {
     app.delete('/todo', (req, res) => {

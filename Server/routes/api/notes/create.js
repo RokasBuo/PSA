@@ -1,4 +1,4 @@
-const Notes = require('../../models/notes');
+const Notes = require('../../../models/notes');
 const xssFilters = require('xss-filters');
 
 module.exports = (app) => {

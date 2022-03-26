@@ -1,4 +1,4 @@
-const Notes = require('../../models/notes');
+const Notes = require('../../../models/notes');
 
 module.exports = (app) => {
     app.delete('/notes', (req, res) => {

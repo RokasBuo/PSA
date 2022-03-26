@@ -1,4 +1,19 @@
-import { postData } from './utils.js';
+async function postData(url = '', data = {}, method = 'POST') {
+    // Default options are marked with *
+    const response = await fetch(url, {
+        method: method,
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        referrerPolicy: 'no-referrer',
+        body: JSON.stringify(data)
+    });
+    return response.json();
+}
+
 const todo_list = document.querySelectorAll(".todo-list")[0];
 const input = document.querySelectorAll(".todo-list-input")[0];
 input.value = '';
@@ -14,14 +29,14 @@ const generateTaskHTML = (data) => {
     </div>
     <i class="remove fas fa-trash"></i>`;
     el.getElementsByClassName("checkbox")[0].addEventListener('click', async (e) => {
-        const response = await postData("/api/todo/", { id: data._id, state: 'completed' }, "PATCH");
+        const response = await postData("/todo/", { id: data._id, state: 'completed' }, "PATCH");
         console.log(response);
         if (response.success) {
             el.classList.add('completed');
         }
     });
     el.getElementsByClassName("remove")[0].addEventListener('click', async (e) => {
-        const response = await postData("/api/todo/", { id: data._id }, "DELETE");
+        const response = await postData("/todo/", { id: data._id }, "DELETE");
         if (response.success) {
             el.remove();
         }
@@ -39,7 +54,7 @@ fetch("/api/todo/").then(res => res.json()).then(data => {
 document.getElementById("form").addEventListener('submit', async e => {
     e.preventDefault();
     const task = new FormData(e.target).get('task');
-    const response = await postData("/api/todo/", { task }, "POST");
+    const response = await postData("/todo/", { task }, "POST");
     console.log(response);
     if (response.success) {
         const el = generateTaskHTML(response.result);

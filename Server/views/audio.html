@@ -21,15 +21,15 @@
         <h3 class="font-pacifico">N</h3>
         <ul class="nav-list">
             <li class="nav-item"><a href="/"><i class="fas fa-home"></i></a> </li>
-            <li class="nav-item"><a href="notes.html"><i class="fas fa-sticky-note"></i></a></li>
-            <li class="nav-item"><a href="todo.html"><i class="fas fa-clipboard-list"></i></a></li>
+            <li class="nav-item"><a href="/notes"><i class="fas fa-sticky-note"></i></a></li>
+            <li class="nav-item"><a href="/todo"><i class="fas fa-clipboard-list"></i></a></li>
             <li class="nav-item"><a href="/calculator"><i class="fas fa-calculator"></i></a></li>
-            <li class="nav-item"><a href="clock.html"><i class="fas fa-clock"></i></a></li>
-            <li class="nav-item"><a href="game.html"><i class="fas fa-gamepad"></i></a></li>
-            <li class="nav-item"><a href="schedule.html"><i class="fas fa-calendar"></i></a></li>
-            <li class="nav-item"><a href="budget.html"><i class="fas fa-money-bill"></i></a></li>
+            <li class="nav-item"><a href="/clock"><i class="fas fa-clock"></i></a></li>
+            <li class="nav-item"><a href="/game"><i class="fas fa-gamepad"></i></a></li>
+            <li class="nav-item"><a href="/timetable"><i class="fas fa-calendar"></i></a></li>
+            <li class="nav-item"><a href="/budget"><i class="fas fa-money-bill"></i></a></li>
             <li class="nav-item"><a href="/audio"><i class="fas fa-music"></i></a></li>
-            <li class="nav-item"><a href="cards.html"><i class="fas fa-brain"></i></a></li>
+            <li class="nav-item"><a href="/cardgame"><i class="fas fa-brain"></i></a></li>
         </ul>
 
         <ul class="nav-list-bottom">
@@ -56,19 +56,20 @@
         </div>
         <div id="memoContainer">
         </div>
-    </div>
-
-    <div class="overlay hide">
-        <div class="browser-not-supporting-audio-recording-box">
-            <p>To record audio, use browsers like Chrome and Firefox that support audio recording.</p>
-            <button type="button" class="close-browser-not-supported-box">Ok.</button>
+        <div class="overlay hide">
+            <div class="browser-not-supporting-audio-recording-box">
+                <p>To record audio, use browsers like Chrome and Firefox that support audio recording.</p>
+                <button type="button" class="close-browser-not-supported-box">Ok.</button>
+            </div>
         </div>
+    
+        <audio controls class="audio-element hide">
+        </audio>
+    
+        <script src="js/audio.js"></script>
     </div>
 
-    <audio controls class="audio-element hide">
-    </audio>
-
-    <script src="js/audio.js"></script>
+    
 </body>
 
 </html>

@@ -8,6 +8,10 @@
   justify-content: center;
 }
 
+.page-name {
+  margin-bottom: 20px;
+}
+
 .note {
   height: 200px;
   box-sizing: border-box;

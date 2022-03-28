@@ -68,6 +68,7 @@ body {
   font-family: pacifico, cursive;
   font-size: 1.8rem;
   letter-spacing: 5px;
+  margin-top: 40px;
 }
 
 .input-result {
@@ -206,6 +207,8 @@ td {
 .float-right {
   float: right;
 }
+
+.page-name
 
 .paginationBttn {
   background: white;

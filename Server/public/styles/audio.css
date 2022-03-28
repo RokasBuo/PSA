@@ -2,6 +2,10 @@
   box-sizing: border-box;
 }
 
+.page-name {
+  margin-bottom: 20px;
+}
+
 .audio-memo {
   padding: 10px;
   border: 3px solid black;

@@ -285,6 +285,7 @@ td {
 
 .card-title {
   margin-bottom: 0.75rem;
+  padding: 5px;
 }
 
 .card-body {

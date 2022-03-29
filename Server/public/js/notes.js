@@ -82,7 +82,9 @@ const createNoteElement = (title, text, date, id) => {
   el.innerHTML = NoteHtml.trim();
   return el;
 };
+
 const INITIAL_VALUES = [];
+
 const clearThis = (el) => {
   const initial = el.innerHTML;
   if (!(initial == "Title" || initial == "Note text")) { return; }
@@ -100,7 +102,8 @@ const blurEvent = (el) => {
 };
 
 const deleteProcess = async (event) => {
-  console.log(event);
+  const confirmation = confirm("Are you sure you want to delete? This action is permanent.");
+  if(!confirmation) return;
   const parent = event.target.offsetParent;
   console.log(parent, parent.id);
   if (parent.id != 'note-example') {

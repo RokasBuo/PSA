@@ -23,7 +23,6 @@ function stopRecording() {
     audioRecorder.stop()
         .then(audio => {
             saveAudio(audio);
-            //  playAudio(audio);
             hideRecordBttns();
         })
         .catch(error => {
@@ -143,42 +142,8 @@ function startAudioRecording() {
 }
 
 /** 
- * Plays recorded audio using the audio element in the HTML document
- * @param {Blob} audio - recorded audio as a Blob 
-*/
-function playAudio(audio) {
-    let reader = new FileReader();
-
-    reader.onload = (e) => {
-        let base64URL = e.target.result;
-
-        // pre-populating the html with a source of empty src throws an error
-        if (!audioElSrc) {
-            createAudioEl();
-        }
-
-        audioElSrc.src = base64URL;
-
-        let BlobType = audio.type.includes(";") ?
-            audio.type.slice(0, audio.type.indexOf(';')) : audio.type;
-        audioElSrc.type = BlobType;
-
-        // call the load method that updates the audio element
-        audioEl.load();
-
-        console.log("Playing");
-        audioEl.play();
-
-        playingIndicator.classList.remove("hide");
-    };
-
-    //read content and convert it to a URL (base64)
-    reader.readAsDataURL(audio);
-}
-
-/** 
- * calculates the elapsed recording time since the moment the function is called in the format hh:mm:ss
- * */
+ * calculates the elapsed recording time since the moment the function is called in the format mm:ss
+ */
 function handleElapsedRecordingTime() {
     displayTimeElapsed("00:00");
 
@@ -195,7 +160,6 @@ function handleElapsedRecordingTime() {
 function displayTimeElapsed(elapsedTime) {
     elapsedTimeTag.innerHTML = elapsedTime;
 
-    //2. Stop the recording when the max number of hours is reached
     if (isRecordingTooLong(elapsedTime)) {
         stopRecording();
     }
@@ -327,6 +291,8 @@ const audioRecorder = {
 };
 
 async function deleteMemo(filename, el) {
+    const confirmation = confirm("Are you sure you want to delete? This action is permanent.");
+    if(!confirmation) return;
     const res = await fetch("/audio-memos", {
         method: "DELETE",
         headers: {

@@ -36,6 +36,8 @@ const generateTaskHTML = (data) => {
         }
     });
     el.getElementsByClassName("remove")[0].addEventListener('click', async (e) => {
+        const confirmation = confirm("Are you sure you want to delete? This action is permanent.");
+        if(!confirmation) return;
         const response = await postData("/todo/", { id: data._id }, "DELETE");
         if (response.success) {
             el.remove();

@@ -336,7 +336,7 @@ async function deleteMemo(filename, el) {
     }).then(res => res.json());
     console.log(el);
     if (res.success) {
-        el.parentElement.remove();
+        el.parentElement.parentElement.remove();
     }
 }
 

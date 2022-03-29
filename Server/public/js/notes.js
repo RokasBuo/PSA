@@ -53,14 +53,20 @@ async function getNotes() {
   });
 }
 
+const formatDate = (date) => {
+  const str = date.toISOString().split("T");
+  return `${str[0]} ${str[1].split(".")[0]}`; 
+};
+
 const createNoteElement = (title, text, date, id) => {
+  const events = 'onclick="clearThis(this)" onblur="blurEvent(this), false"';
   const NoteHtml = `<div class="card-body">
-    <h5 class="card-title" id="note-title" contenteditable="true">${title}</h5>
-    <p class="card-text" id="note-text" contenteditable="true">${text}</p>
+    <h5 class="card-title" id="note-title" contenteditable="true" ${id == 'note-example' ? events : ''}>${title}</h5>
+    <p class="card-text" id="note-text" contenteditable="true" ${id == 'note-example' ? events : ''}>${text}</p>
     </div>
     <div class="card-footer text-muted">
     <div class="d-inline-block">
-        ${date == 0 ? "Just now" : (new Date(date))}
+        ${date == 0 ? "Just now" : formatDate(new Date(date))}
     </div>
     <div style="float:right; margin-top: -5px">
         <button class="btn" id="btn-save"><i class="fa fa-check text-muted"></i></button>
@@ -76,8 +82,22 @@ const createNoteElement = (title, text, date, id) => {
   el.innerHTML = NoteHtml.trim();
   return el;
 };
+const INITIAL_VALUES = [];
+const clearThis = (el) => {
+  const initial = el.innerHTML;
+  if (!(initial == "Title" || initial == "Note text")) { return; }
+  INITIAL_VALUES[el] = initial;
+  console.log(INITIAL_VALUES);
+  console.log(initial);
+  el.innerHTML = "";
+};
 
-
+const blurEvent = (el) => {
+  const initial = el.innerHTML;
+  if (initial == "") {
+    el.innerHTML = INITIAL_VALUES[el];
+  }
+};
 
 const deleteProcess = async (event) => {
   console.log(event);

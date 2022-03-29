@@ -7,7 +7,16 @@
   max-width: 75%;
   justify-content: center;
 }
-
+.btn {
+  background: none;
+  padding: 5px;
+  border-radius: 3px;
+  cursor: pointer;
+  color: black;
+  margin: 0px 3px;
+  width: 30px;
+  font-size: 16px;
+}
 .page-name {
   margin-bottom: 20px;
 }

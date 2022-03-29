@@ -8,7 +8,7 @@
 }
 
 .add-items input[type="text"] {
-    width: 90%;
+    width: 83%;
     background: transparent
 }
 
@@ -30,7 +30,7 @@
 
 .list-wrapper {
     height: 100%;
-    max-width: 97.5%;
+    max-width: 91%;
     max-height: 100%
 }
 

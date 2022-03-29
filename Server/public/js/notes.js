@@ -115,7 +115,6 @@ const deleteProcess = async (event) => {
 
 const saveProcess = async (event) => {
   const parent = event.target.offsetParent;
-  console.log(parent)
   const title = parent.querySelector("#note-title").innerText;
   const text = parent.querySelector("#note-text").innerText;
   if (parent.id != 'note-example') {

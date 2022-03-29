@@ -14,6 +14,7 @@ module.exports = (app) => {
 
         if (text == "" || title == "") return res.status(400).json({ error: true, message: "All fields are required" });
         if (title.length + text.length > 1000) return res.status(400).json({ error: true, message: "Title and text length must be below 1000 characters" });
+        
         Notes.updateOne({ user, _id: id }, { $set: data }, (err, doc) => {
             if (err) {
                 return res.status(500).json({ error: err });

@@ -8,9 +8,10 @@ module.exports = (app) => {
         const text = xssFilters.inHTMLData(body.text.trim());
         const title = xssFilters.inHTMLData(body.title.trim());
         const user = req.user._id;
-
+        // check if too long
         if (title == "" || text == "") return res.status(400).json({ error: true, message: "All fields are required" });
 
+        if (title.length + text.length > 1000) return res.status(400).json({ error: true, message: "Title and text length must be below 1000 characters" });
         const note = new Notes({ user, text, title });
 
         note.save((err, doc) => {

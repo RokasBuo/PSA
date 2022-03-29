@@ -7,8 +7,8 @@ module.exports = (app) => {
         const task = xssFilters.inHTMLData(body.task.trim());
         const user = req.user._id;
 
-        if(!task) return res.status(400).json({ error: true, message: "Task is required" });
-
+        if (!task) return res.status(400).json({ error: true, message: "Task is required" });
+        if (task.length > 1000) return res.status(400).json({ error: true, message: "Task length must be below 1000 characters" });
         const todo = new Todo({ user, task, state: "active" });
 
         todo.save((err, doc) => {

@@ -23,7 +23,7 @@ function stopRecording() {
     audioRecorder.stop()
         .then(audio => {
             saveAudio(audio);
-          //  playAudio(audio);
+            //  playAudio(audio);
             hideRecordBttns();
         })
         .catch(error => {
@@ -49,7 +49,7 @@ async function saveAudio(audio) {
         body: form,
     }).then(res => res.json());
     console.log(res);
-    if(res.error) {
+    if (res.error) {
         return alert(res.message);
     }
     addMemoToContainer(res);
@@ -332,23 +332,31 @@ async function deleteMemo(filename, el) {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({filename})
+        body: JSON.stringify({ filename })
     }).then(res => res.json());
     console.log(el);
-    if(res.success) {
+    if (res.success) {
         el.parentElement.remove();
     }
 }
 
+const formatDate = (date) => {
+    const str = date.toISOString().split("T");
+    return `${str[0]} ${str[1].split(".")[0]}`;
+};
+
 async function addMemoToContainer(memo) {
     memoContainer.innerHTML += `
         <div class="card audio-memo">
-            ${memo.filename}<br/>
-            ${memo.date}<br/>
+            <!-- ${memo.filename}<br/> -->
+            
             <audio controls>
                 <source src="uploads/audio/${memo.user}/${memo.filename}" type="${memo.filetype}">
             </audio>
-            <span onclick="deleteMemo('${memo.filename}', this)">DELETE</span>
+            <div>
+                <div style="margin-top: 10px; display: inline-block;">${formatDate(new Date(memo.date))}</div>
+                <button class="btn float-right" id="btn-delete" onclick="deleteMemo('${memo.filename}', this)"><i class="fa fa-trash text-muted"></i></button>
+            </div>
         </div>
     `;
     return;

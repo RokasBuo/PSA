@@ -2,6 +2,7 @@
 
 <head>
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/todo.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/1b20b6c512.js" crossorigin="anonymous"></script>
     <script src="js/todo.js" defer type="text/javascript"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
@@ -39,7 +41,40 @@
         <div class="page-name ">
             <h1>To Do</h1>
         </div>
-       
+        
+        <div id="app">
+            <div class="page-content page-container" id="page-content">
+                <div class="padding">
+                  <div class="row container d-flex justify-content-center">
+                    <div class="col-md-12">
+            
+                      <div class="card-body">
+                        <form id="form" method="POST">
+                          <div class="add-items d-flex">
+                            <input
+                              type="text"
+                              class="todo-list-input"
+                              placeholder="What do you need to do today?"
+                              name="task"
+                            />
+                            <button type="submit" class="add btn font-weight-bold change-button button-style">
+                                <i class="fas fa-arrow-alt-circle-right" aria-hidden="true"></i>
+                            </button>
+                          </div>
+            
+                        </form>
+                        <div class="list-wrapper">
+                          <ul class="d-flex flex-column-reverse todo-list" id="todo-list">
+                            
+                          </ul>
+                        </div>
+                      </div>
+            
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
     </div>
 
 </body>

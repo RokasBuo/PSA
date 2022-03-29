@@ -8,7 +8,8 @@ module.exports = (app) => {
             if (err) {
                 return res.status(500).json({ error: err });
             }
-            return res.json({ success: true, result: doc });
+            const now = new Date();
+            return res.json({ success: true, result: doc, now: now });
         });
     });
 };

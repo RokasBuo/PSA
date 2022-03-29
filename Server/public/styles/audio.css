@@ -5,7 +5,16 @@
 .page-name {
   margin-bottom: 20px;
 }
-
+.btn {
+  background: none;
+  padding: 5px;
+  border-radius: 3px;
+  cursor: pointer;
+  color: black;
+  margin: 0px 3px;
+  width: 30px;
+  font-size: 16px;
+}
 .audio-memo {
   padding: 10px;
   border: 3px solid black;

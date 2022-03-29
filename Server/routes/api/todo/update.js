@@ -7,13 +7,16 @@ module.exports = (app) => {
         const body = req.body;
         const user = req.user._id;
         const id = body.id;
-        const task = xssFilters.inHTMLData(body.task.trim());
-        const state = xssFilters.inHTMLData(body.state.trim());
-        const data = { task, state };
+        const data = {  };
 
-        if (task == "" || state == "" || !id) return res.status(400).json({ error: true, message: "All fields are required" });
-
-
+        if(body.task) {
+            data.task = xssFilters.inHTMLData(body.task.trim());
+        }
+        if(body.state) {
+            data.state = xssFilters.inHTMLData(body.state.trim());
+        }
+        
+        if (Object.keys(data).length == 0 || !id) return res.status(400).json({ error: true, message: "All fields are required" });
 
         Todo.updateOne({ user, _id: id }, { $set: data }, (err, doc) => {
             if (err) {

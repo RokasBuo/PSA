@@ -208,7 +208,6 @@ td {
   float: right;
 }
 
-.page-name
 
 .paginationBttn {
   background: white;
@@ -223,6 +222,7 @@ td {
 #previousPage {
   border-top-left-radius: 10px;
   border-width: 0px 0px 0px 3px;
+  
 }
 #nextPage {
   border-top-left-radius: 10px;

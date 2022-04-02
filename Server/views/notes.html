@@ -1,6 +1,7 @@
 <html>
 
 <head>
+    <link rel="stylesheet" href="styles/jqpaginator.css">
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/notes.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,6 +12,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital@1&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/1b20b6c512.js" crossorigin="anonymous"></script>
+    <script src="js/jquery.min.js" defer type="text/javascript"></script>
+    <script src="js/jqpaginator.js" defer type="text/javascript"></script>
     <script src="js/notes.js" defer type="text/javascript"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -41,11 +44,12 @@
         <div class="page-name ">
             <h1>Notes</h1>
         </div>
-
+        <button class="add-note" id="create-note" type="button">+</button>
         <div id="app">
-            <button class="add-note" id="create-note" type="button">+</button>
+
         </div>
-       
+        <div class="pagination"></div>
+
     </div>
 
 </body>

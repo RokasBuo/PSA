@@ -1,21 +1,26 @@
-const Notes = require('../../../models/notes');
+const Timetable = require('../../../models/timetable');
 const xssFilters = require('xss-filters');
 
 module.exports = (app) => {
-    app.patch('/notes', (req, res) => {
+    app.patch('/timetable', (req, res) => {
+        console.log("updating!");
         if (!req.user) return res.status(401).json({ error: true, message: "You must be logged in" });
         const body = req.body;
         const user = req.user._id;
         const id = body.id;
-        const text = xssFilters.inHTMLData(body.text.trim());
         const title = xssFilters.inHTMLData(body.title.trim());
+        let color = body.color;
+        const COLORS = ['green', 'blue', 'cyan', 'white', 'orange', 'purple', 'pink'];
+        if (!COLORS.includes(color)) {
+            color = "green";
+        }
 
-        const data = { text, title };
+        const data = { title, color };
 
-        if (text == "" || title == "") return res.status(400).json({ error: true, message: "All fields are required" });
-        if (title.length + text.length > 1000) return res.status(400).json({ error: true, message: "Title and text length must be below 1000 characters" });
-        
-        Notes.updateOne({ user, _id: id }, { $set: data }, (err, doc) => {
+        if (title == "") return res.status(400).json({ error: true, message: "Title field is required" });
+        if (title.length > 1000) return res.status(400).json({ error: true, message: "Title length must be below 1000 characters" });
+
+        Timetable.updateOne({ user, _id: id }, { $set: data }, (err, doc) => {
             if (err) {
                 return res.status(500).json({ error: err });
             }

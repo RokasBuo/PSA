@@ -9,10 +9,17 @@ const schema = new Schema({
         type: String,
         trim: true
     },
-    date: {
-        type: Date,
-        default: Date.now,
+    day: {
+        type: String,
+        trim: true,
     },
+    time: {
+        type: Number,
+    },
+    color: {
+        type: String,
+        trim: true
+    }
 });
 
 module.exports = mongoose.model('Timetable', schema);

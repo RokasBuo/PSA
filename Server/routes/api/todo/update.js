@@ -17,8 +17,14 @@ module.exports = (app) => {
         }
         
         if (Object.keys(data).length == 0 || !id) return res.status(400).json({ error: true, message: "All fields are required" });
-        if (data.task.length > 1000) return res.status(400).json({ error: true, message: "Task length must be below 1000 characters" });
-        
+        if(data.task) {
+            if (data.task.length > 1000) return res.status(400).json({ error: true, message: "Task length must be below 1000 characters" });
+        }
+        if(data.state) {
+            const STATES =['active', 'completed', 'removed'];
+            if(!STATES.includes(data.state)) return res.status(400).json({ error: true, message: "Invalid state given" });
+        }
+
         Todo.updateOne({ user, _id: id }, { $set: data }, (err, doc) => {
             if (err) {
                 return res.status(500).json({ error: err });

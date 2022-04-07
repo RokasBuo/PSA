@@ -10,7 +10,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital@1&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/1b20b6c512.js" crossorigin="anonymous"></script>
-    <script src="js/dashboard.js" defer type="text/javascript"></script>
+    <script type="text/javascript" src="js/modal.js" defer></script>
+    <script src="js/timetable.js" defer type="text/javascript"></script>
+    <link rel="stylesheet" href="styles/timetable.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
@@ -37,11 +39,150 @@
 
     </div>
     <div class="content">
-        <div class="page-name ">
-            <h1>Time Table</h1>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-1">
+                    <div class="page-name ">
+                        <h1>Time Table</h1>
+                    </div>
+                    <div class="timetable">
+                        <div class="week-names">
+                            <div>monday</div>
+                            <div>tuesday</div>
+                            <div>wednesday</div>
+                            <div>thursday</div>
+                            <div>friday</div>
+                            <div class="weekend">saturday</div>
+                            <div class="weekend">sunday</div>
+                        </div>
+                        <div class="time-interval">
+                            <div>8:00 - 10:00</div>
+                            <div>10:00 - 12:00</div>
+                            <div>12:00 - 14:00</div>
+                            <div>14:00 - 16:00</div>
+                            <div>16:00 - 18:00</div>
+                            <div>18:00 - 20:00</div>
+                        </div>
+                        <div class="schedule">
+                            <div id="monday-1"></div>
+                            <div id="tuesday-1"></div>
+                            <div id="wednesday-1"></div>
+                            <div id="thursday-1"></div>
+                            <div id="friday-1"></div>
+                            <div class="weekend" id="saturday-1"></div>
+                            <div class="weekend" id="sunday-1"></div>
+                            <div id="monday-2"></div>
+                            <div id="tuesday-2"></div>
+                            <div id="wednesday-2"></div>
+                            <div id="thursday-2"></div>
+                            <div id="friday-2"></div>
+                            <div class="weekend" id="saturday-2"></div>
+                            <div class="weekend" id="sunday-2"></div>
+                            <div id="monday-3"></div>
+                            <div id="tuesday-3"></div>
+                            <div id="wednesday-3"></div>
+                            <div id="thursday-3"></div>
+                            <div id="friday-3"></div>
+                            <div class="weekend" id="saturday-3"></div>
+                            <div class="weekend" id="sunday-3"></div>
+                            <div id="monday-4"></div>
+                            <div id="tuesday-4"></div>
+                            <div id="wednesday-4"></div>
+                            <div id="thursday-4"></div>
+                            <div id="friday-4"></div>
+                            <div class="weekend" id="saturday-4"></div>
+                            <div class="weekend" id="sunday-4"></div>
+                            <div id="monday-5"></div>
+                            <div id="tuesday-5"></div>
+                            <div id="wednesday-5"></div>
+                            <div id="thursday-5"></div>
+                            <div id="friday-5"></div>
+                            <div class="weekend" id="saturday-5"></div>
+                            <div class="weekend" id="sunday-5"></div>
+                            <div id="monday-6"></div>
+                            <div id="tuesday-6"></div>
+                            <div id="wednesday-6"></div>
+                            <div id="thursday-6"></div>
+                            <div id="friday-6"></div>
+                            <div class="weekend" id="saturday-6"></div>
+                            <div class="weekend" id="sunday-6"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-       
     </div>
+
+    <div id="add-modal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <form method="POST" action="/timetable" id="add-modal-form">
+                <div style="text-align:center;">
+                    <h1>Add an event</h1>
+                    <label for="title">Title</label>
+                    <input type="text" required name="title" placeholder="Maths" id="title"><br />
+                    <label for="color">Color</label>
+                    <select name="color" id="color">
+                        <option value="green">Green</option>
+                        <option value="purple">Purple</option>
+                        <option value="blue">Blue</option>
+                        <option value="cyan">Cyan</option>
+                        <option value="pink">Pink</option>
+                        <option value="orange">Orange</option>
+                        <option value="white">White</option>
+                    </select>
+                </div>
+                <button type="submit" class="button" id="add">Add</button>
+                <button type="button" class="button float-right button-red modal-cancel" id="cancel">Cancel</button>
+            </form>
+        </div>
+
+    </div>
+
+
+    <div id="selection-modal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+
+            <div style="text-align:center;">
+                <h1>Edit or add event?</h1>
+            </div>
+            <button type="submit" class="button modal-cancel" id="select-edit">Edit</button>
+            <button type="button" class="button float-right modal-cancel" id="select-add">Add</button>
+        </div>
+    </div>
+
+
+    <div id="edit-modal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <form method="PATCH" action="/timetable" id="edit-modal-form">
+                <div style="text-align:center;">
+                    <h1>Edit event (<span id="edit-event-title"></span>)</h1>
+                    <label for="title">Title</label>
+                    <input type="text" required name="title" id="edit-title-input"><br />
+                    <label for="color">Color</label>
+                    <select name="color" id="color">
+                        <option class="edit-option" value="green">Green</option>
+                        <option class="edit-option" value="purple">Purple</option>
+                        <option class="edit-option" value="blue">Blue</option>
+                        <option class="edit-option" value="cyan">Cyan</option>
+                        <option class="edit-option" value="pink">Pink</option>
+                        <option class="edit-option" value="orange">Orange</option>
+                        <option class="edit-option" value="white">White</option>
+                    </select>
+                </div>
+                <button type="submit" class="button" id="edit">Edit</button>
+                <button type="button" class="button float-right button-red modal-cancel"
+                    id="cancel-edit">Cancel</button>
+            </form>
+        </div>
+    </div>
+
 
 </body>
 

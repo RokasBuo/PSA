@@ -11,6 +11,8 @@ const todayBttn = document.getElementById("today");
 const perPage = 10;
 let currentPage = 1;
 
+
+
 function resetStorage() {
     history = { inputs: [], results: [] };
     saveStorage("history", history);
@@ -56,8 +58,10 @@ let history = getStorage("history") || { inputs: [], results: [] };
 
 let modalPrefs = getStorage("modalPrefs") || { hide: 0 };
 
+const modal = new Modal(document.getElementById("modal"));
+
 okBttn.addEventListener('click', e => {
-    hideModal();
+    modal.hideModal();
 });
 
 todayBttn.addEventListener('click', e => {
@@ -71,7 +75,7 @@ todayBttn.addEventListener('click', e => {
 
     modalPrefs.hide = now.getTime();
     saveStorage("modalPrefs", modalPrefs);
-    hideModal();
+    modal.hideModal();
 });
 
 neverBttn.addEventListener('click', e => {
@@ -80,7 +84,7 @@ neverBttn.addEventListener('click', e => {
 
     modalPrefs.hide = now.getTime();
     saveStorage("modalPrefs", modalPrefs);
-    hideModal();
+    modal.hideModal();
 });
 
 inputEl.addEventListener("paste", e => {
@@ -88,7 +92,7 @@ inputEl.addEventListener("paste", e => {
     console.log(modalPrefs.hide, Date(), modalPrefs.hide > Date());
     if (modalPrefs.hide < (new Date()).getTime()) {
 
-        showModal();
+        modal.showModal();
         e.preventDefault();
     }
 });

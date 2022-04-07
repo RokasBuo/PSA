@@ -9,11 +9,10 @@ module.exports = (app) => {
         const title = xssFilters.inHTMLData(body.title.trim());
         const user = req.user._id;
         const DAYS = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
-
         const day = body.day.toLowerCase();
         const time = Number(body.time);
         let color = body.color;
-        const COLORS = ['green', 'blue', 'cyan', 'white', 'orange', 'purple', 'pink'];
+        const COLORS = ['brown', 'blue', 'cyan', 'white', 'orange', 'coffee', 'green'];
         if (!COLORS.includes(color)) {
             color = "green";
         }

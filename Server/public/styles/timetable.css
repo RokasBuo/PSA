@@ -12,26 +12,28 @@
   grid-template-rows: 60px;
   height: calc(100% - 120px);
 }
-.timetable .accent-pink-gradient {
+.timetable .accent-brown-gradient {
   display: flex;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, #ee8ebc, #eea08e);
+  /* background: linear-gradient(135deg, #ee8ebc, #eea08e); */
+  background: #221916;
   transition: 0.2s ease box-shadow, 0.2s ease transform;
   color: white;
   font-size: 24px;
   justify-content: center;
   align-items: center;
 }
-.timetable .accent-pink-gradient:hover {
-  box-shadow: 0 20px 30px 0 rgba(238, 142, 188, 0.3);
+.timetable .accent-brown-gradient:hover {
+  box-shadow: 0 20px 30px 0 rgba(34, 25, 22, 0.3);
   transform: scale(1.05);
 }
 .timetable .accent-orange-gradient {
   display: flex;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, #eec08e, #dcee8e);
+  /* background: linear-gradient(135deg, #eec08e, #dcee8e); */
+  background: #30231e;
   transition: 0.2s ease box-shadow, 0.2s ease transform;
   color: white;
   font-size: 24px;
@@ -39,14 +41,15 @@
   align-items: center;
 }
 .timetable .accent-orange-gradient:hover {
-  box-shadow: 0 20px 30px 0 rgba(238, 192, 142, 0.3);
+  box-shadow: 0 20px 30px 0 rgba(34, 25, 22, 0.3);
   transform: scale(1.05);
 }
 .timetable .accent-green-gradient {
   display: flex;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, #bcee8e, #8eeea0);
+  /* background: linear-gradient(135deg, #bcee8e, #8eeea0); */
+  background: #879274;
   transition: 0.2s ease box-shadow, 0.2s ease transform;
   color: white;
   font-size: 24px;
@@ -61,7 +64,8 @@
   display: flex;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, #8eeec0, #8edcee);
+  /* background: linear-gradient(135deg, #8eeec0, #8edcee); */
+  background: #37575e;
   transition: 0.2s ease box-shadow, 0.2s ease transform;
   color: white;
   font-size: 24px;
@@ -69,14 +73,15 @@
   align-items: center;
 }
 .timetable .accent-cyan-gradient:hover {
-  box-shadow: 0 20px 30px 0 rgba(142, 238, 192, 0.3);
+  box-shadow: 0 20px 30px 0 rgba(55, 87, 94, 0.3);
   transform: scale(1.05);
 }
 .timetable .accent-blue-gradient {
   display: flex;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, #8ebcee, #a08eee);
+  /* background: linear-gradient(135deg, #8ebcee, #a08eee); */
+  background: #111a1f;
   transition: 0.2s ease box-shadow, 0.2s ease transform;
   color: white;
   font-size: 24px;
@@ -84,14 +89,15 @@
   align-items: center;
 }
 .timetable .accent-blue-gradient:hover {
-  box-shadow: 0 20px 30px 0 rgba(142, 188, 238, 0.3);
+  box-shadow: 0 20px 30px 0 rgba(17, 26, 31, 0.3);
   transform: scale(1.05);
 }
 .timetable .accent-white-gradient {
   display: flex;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, #ffffff, #fcfcfc);
+  /* background: linear-gradient(135deg, #ffffff, #fcfcfc); */
+  background: #fcfcfc;
   transition: 0.2s ease box-shadow, 0.2s ease transform;
   color: black;
   font-size: 24px;
@@ -102,19 +108,20 @@
   box-shadow: 0 20px 30px 0 rgba(194, 194, 194, 0.3);
   transform: scale(1.05);
 }
-.timetable .accent-purple-gradient {
+.timetable .accent-coffee-gradient {
   display: flex;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, #c08eee, #ee8edc);
+  /* background: linear-gradient(135deg, #c08eee, #ee8edc); */
+  background: #895230;
   transition: 0.2s ease box-shadow, 0.2s ease transform;
   color: white;
   font-size: 24px;
   justify-content: center;
   align-items: center;
 }
-.timetable .accent-purple-gradient:hover {
-  box-shadow: 0 20px 30px 0 rgba(192, 142, 238, 0.3);
+.timetable .accent-coffee-gradient:hover {
+  box-shadow: 0 20px 30px 0 rgba(137, 82, 48, 0.3);
   transform: scale(1.05);
 }
 .timetable .weekend {
@@ -162,7 +169,7 @@
   flex-direction: column;
   cursor: pointer;
 }
-.week-names{
+.week-names {
   background-color: black;
   color: white;
 }

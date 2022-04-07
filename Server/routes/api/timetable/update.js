@@ -10,7 +10,7 @@ module.exports = (app) => {
         const id = body.id;
         const title = xssFilters.inHTMLData(body.title.trim());
         let color = body.color;
-        const COLORS = ['green', 'blue', 'cyan', 'white', 'orange', 'purple', 'pink'];
+        const COLORS = ['brown', 'blue', 'cyan', 'white', 'orange', 'coffee', 'green'];
         if (!COLORS.includes(color)) {
             color = "green";
         }

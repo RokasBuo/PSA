@@ -128,6 +128,7 @@ function create(data, destroy = false) {
         numberMargin: 1,
         itemsPerPage: 5,
         data: data,
+        buttonText: [`<i class="fas fa-arrow-left"></i>`, `<i class="fas fa-arrow-right"></i>`],
         //data: dataFunc,
         render: renderer,
     });

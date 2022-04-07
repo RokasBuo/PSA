@@ -5,14 +5,15 @@ module.exports = (app) => {
     app.post('/budget', (req, res) => {
         if (!req.user) return res.status(401).json({ error: true, message: "You must be logged in" });
         const body = req.body;
-        const type = xssFilters.inHTMLData(body.type.trim());
-        const amount = Number(body.amount);
         const user = req.user._id;
-
-        if (type == "" || body.amount == "") return res.status(400).json({ error: true, message: "All fields are required" });
-        if (type.length > 1000) return res.status(400).json({ error: true, message: "Type length must be below 1000 characters" });
-        if (isNaN(amount)) return res.status(400).json({ error: true, message: "Amount must be a number" });
-        const budget = new Budget({ user, type, amount });
+        const data = { user };
+        for (let key of ['income', 'rent', 'utilities', 'food', 'insurance', 'result', 'savings']) {
+            if (!body[key] || body[key] == "" || isNaN(body[key])) {
+                return res.status(400).json({ error: true, message: "All fields are required" });
+            }
+            data[key] = Number(body[key]);
+        }
+        const budget = new Budget(data);
 
         budget.save((err, doc) => {
             if (err) {

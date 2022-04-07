@@ -5,11 +5,25 @@ const schema = new Schema({
         type: Schema.ObjectId,
         ref: 'User'
     },
-    type: {
-        type: String,
-        trim: true
+    income: {
+        type: Number,
     },
-    amount: {
+    rent: {
+        type: Number,
+    },
+    utilities: {
+        type: Number,
+    },
+    food: {
+        type: Number,
+    },
+    insurance: {
+        type: Number,
+    },
+    result: {
+        type: Number,
+    },
+    savings: {
         type: Number,
     },
     date: {

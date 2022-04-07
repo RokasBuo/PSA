@@ -1,8 +1,24 @@
 $("button").click(gather);
 $(document).ready(centerme);
 $(window).resize(centerme);
+const historyContainer = document.getElementById("history-data");
+async function postData(url = '', data = {}, method = 'POST') {
+    // Default options are marked with *
+    const response = await fetch(url, {
+        method: method,
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        referrerPolicy: 'no-referrer',
+        body: JSON.stringify(data)
+    });
+    return response.json();
+}
 
-function gather() {
+async function gather() {
     income = document.getElementById("income").value;
     income = income.replace(/\D/g, '');
     rent = document.getElementById("rent").value;
@@ -14,7 +30,7 @@ function gather() {
     insurance = document.getElementById("insurance").value;
     insurance = insurance.replace(/\D/g, '');
     result = income - rent - utilities - food - insurance;
-    savings = (income * 0.20);
+    savings = Math.round(income * 0.20);
     $(".results-data").empty();
     $(".emoji").empty();
     if (income == "" || rent == "" || utilities == "" || food == "" || insurance == "") {
@@ -35,7 +51,15 @@ function gather() {
             '<p class="text-sucess"> After your expenses you have $' + result + ' left in your budget.</p>', '<p class="text-sucess">But you should save at least $' + savings + '.</p>');
         $(".emoji").append('<i class="happy">&nbsp;</i>');
     }
+
+    const res = await postData('/budget', { income, rent, utilities, food, insurance, result, savings }, "POST");
+    if (res.success) {
+        data.push(res.result);
+        create(data, true);
+    }
+
 }
+
 
 function centerme() {
     boiheight = $(".center-meh-boi").height();
@@ -43,4 +67,75 @@ function centerme() {
     $(".center-meh-boi").css("margin-top", "-" + middle + "px");
     console.log(boiheight);
 }
+const formatDate = (date) => {
+    const str = date.toISOString().split("T");
+    return `${str[0]} ${str[1].split(".")[0]}`;
+};
 
+function addRowToContainer(data) {
+    const html = `<tr>
+        <td>
+            ${data.income}
+        </td>
+        <td>
+            ${data.rent}
+        </td>
+        <td>
+            ${data.utilities}
+        </td>
+        <td>
+            ${data.food}
+        </td>
+        <td>
+            ${data.insurance}
+        </td>
+        <td>
+            ${data.result}
+        </td>
+        <td>
+            ${data.savings}
+        </td>
+        <td>
+            ${formatDate(new Date(data.date))}
+        </td>
+    </tr>`;
+    historyContainer.innerHTML += html;
+}
+
+async function getHistory() {
+    return new Promise(async (resolve, reject) => {
+        const res = await fetch("/budget-list").then(res => res.json()).catch(err => reject);
+        resolve(res.result);
+    });
+}
+
+function renderer(history) {
+    historyContainer.innerHTML = "";
+    console.log(history);
+    history.forEach(h => addRowToContainer(h));
+}
+
+function create(data, destroy = false) {
+    console.log("creating", data);
+    data = [...data].reverse();
+    if (destroy) {
+        $('.pagination').jqpaginator('destroy');
+    }
+    $('.pagination').jqpaginator({
+        showButtons: true,
+        showInput: false,
+        showNumbers: true,
+        numberMargin: 1,
+        itemsPerPage: 5,
+        data: data,
+        //data: dataFunc,
+        render: renderer,
+    });
+}
+
+let data;
+
+(async function init() {
+    data = await getHistory();
+    create(data, false);
+})();

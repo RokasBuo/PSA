@@ -25,6 +25,7 @@ async function getNotes() {
 }
 
 const formatDate = (date) => {
+  console.log("date passed:", date);
   const str = date.toISOString().split("T");
   return `${str[0]} ${str[1].split(".")[0]}`;
 };
@@ -83,8 +84,8 @@ const deleteProcess = async (event) => {
   if (parent.id != 'note-example') {
     const res = await postData("/notes", { id: parent.id }, 'DELETE');
     data = data.filter(note => {
-      if(note._id == 'note-example') return note;
-      if(note._id != parent.id) return note;
+      if (note._id == 'note-example') return note;
+      if (note._id != parent.id) return note;
     });
     console.log(res);
   } else {
@@ -166,7 +167,8 @@ let data;
 
   function addNote() {
     const hash = new Date().getTime();
-    const el = createNoteElement();
+    const el = createNoteElement('Title', 'Note text', (new Date()).toISOString(), 'note-example', hash);
+
     data.push({ _id: "note-example", hash: hash, title: 'Title', text: 'Note text', date: (new Date()).toISOString() });
     el.setAttribute('hash', hash);
     create(data, true);

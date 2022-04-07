@@ -52,6 +52,8 @@ async function saveAudio(audio) {
         return alert(res.message);
     }
     addMemoToContainer(res);
+    data.push(res);
+    create(data, true);
 }
 
 stopRecordingBttn.addEventListener("click", e => {
@@ -303,6 +305,8 @@ async function deleteMemo(filename, el) {
     console.log(el);
     if (res.success) {
         el.parentElement.parentElement.remove();
+        data = data.filter(d => d.filename != filename);
+        create(data, true);
     }
 }
 
@@ -313,7 +317,7 @@ const formatDate = (date) => {
 
 async function addMemoToContainer(memo) {
     memoContainer.innerHTML += `
-        <div class="card audio-memo">
+        <div class="card audio-memo" id="${memo.id}">
             <!-- ${memo.filename}<br/> -->
             
             <audio controls>
@@ -329,10 +333,39 @@ async function addMemoToContainer(memo) {
 }
 
 async function getMemos() {
-    const res = await fetch("/audio-memos").then(res => res.json());
-    const list = res.list;
-    console.log(list);
-    list.forEach(memo => addMemoToContainer(memo));
+    return new Promise(async (resolve, reject) => {
+        const res = await fetch("/audio-memos").then(res => res.json()).catch(err => reject);
+        resolve(res.list);
+    });
 }
 
-getMemos();
+function renderer(memos) {
+    memoContainer.innerHTML = "";
+    console.log(memos);
+    memos.forEach(memo => addMemoToContainer(memo));
+}
+
+function create(data, destroy = false) {
+    console.log("creating", data);
+    data = [...data].reverse();
+    if (destroy) {
+        $('.pagination').jqpaginator('destroy');
+    }
+    $('.pagination').jqpaginator({
+        showButtons: true,
+        showInput: false,
+        showNumbers: true,
+        numberMargin: 1,
+        itemsPerPage: 5,
+        data: data,
+        //data: dataFunc,
+        render: renderer,
+    });
+}
+
+let data;
+
+(async function init() {
+    data = await getMemos();
+    create(data, false);
+})();

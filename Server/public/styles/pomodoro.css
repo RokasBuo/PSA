@@ -1,0 +1,38 @@
+.btn {
+    background-color: black;
+    color: white;
+    padding: 13px;
+    font-size: 16px;
+    width: 20%;
+    border-radius: 15px;
+    font-family: Montserrat;
+    text-align: center;
+    margin: 20px;
+    cursor: pointer;
+}
+progress {
+    padding: 15px;
+    width: 200px;
+}
+.clock {
+    margin: 20px;
+}
+
+.content, .timer {
+    height: 85%;
+}
+
+.timer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.clock {
+    text-align: center;
+    font-family: pacifico, cursive;
+    font-size: 1.8rem;
+    letter-spacing: 5px;
+    margin-top: 40px;
+}

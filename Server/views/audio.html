@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="styles/jqpaginator.css">
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/audio.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,8 +14,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital@1&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/1b20b6c512.js" crossorigin="anonymous"></script>
+    <script src="js/jquery.min.js" defer type="text/javascript"></script>
+    <script src="js/jqpaginator.js" defer type="text/javascript"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-  
+
 </head>
 
 <body>
@@ -53,7 +56,8 @@
             <i class="stop-recording-button fa fa-stop-circle-o" aria-hidden="true"></i>
         </div>
         <div class="text-indication-of-audio-playing-container">
-            <p class="text-indication-of-audio-playing hide">Audio is playing<span>.</span><span>.</span><span>.</span></p>
+            <p class="text-indication-of-audio-playing hide">Audio is playing<span>.</span><span>.</span><span>.</span>
+            </p>
         </div>
         <div id="memoContainer">
         </div>
@@ -63,14 +67,14 @@
                 <button type="button" class="close-browser-not-supported-box">Ok.</button>
             </div>
         </div>
-    
+
         <audio controls class="audio-element hide">
         </audio>
-    
+
         <script src="js/audio.js"></script>
     </div>
+    <div class="pagination"></div>
 
-    
 </body>
 
 </html>

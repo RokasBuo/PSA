@@ -166,7 +166,7 @@ let data;
 
   function addNote() {
     const hash = new Date().getTime();
-    const el = createNoteElement("Title", "Note text", 0, "note-example", hash);
+    const el = createNoteElement();
     data.push({ _id: "note-example", hash: hash, title: 'Title', text: 'Note text', date: (new Date()).toISOString() });
     el.setAttribute('hash', hash);
     create(data, true);

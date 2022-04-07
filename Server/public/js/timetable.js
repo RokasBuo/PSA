@@ -21,8 +21,8 @@ const selectionModal = new Modal(document.getElementById("selection-modal"));
 const editModal = new Modal(document.getElementById("edit-modal"));
 const editTitle = document.getElementById("edit-event-title");
 const editInput = document.getElementById("edit-title-input");
-
-
+const deleteModal = new Modal(document.getElementById("delete-modal"));
+const addTitle = document.getElementById("add-title");
 
 
 function selectEditEvent(e, ev) {
@@ -35,11 +35,20 @@ function selectEditEvent(e, ev) {
     ev.target.removeEventListener('click', selectEditEvent);
 }
 
+function selectDeleteEvent(e, ev) {
+    console.log('delete');
+    deleteModal.showModal();
+    ev.target.removeEventListener('click', selectDeleteEvent);
+}
+
 function selectAddEvent(ev) {
     console.log('add');
     addModal.showModal();
+    console.log(addTitle);
+    addTitle.value = "";
     ev.target.removeEventListener('click', selectAddEvent);
 }
+
 
 function generateEventDiv(data) {
     const div = document.createElement("div");
@@ -51,9 +60,12 @@ function generateEventDiv(data) {
         if (e.target.classList.contains("event")) {
             selectionModal.showModal();
             document.getElementById("select-edit").addEventListener('click', ev => selectEditEvent(e, ev), false);
+            document.getElementById("select-delete").addEventListener('click', ev => selectDeleteEvent(e, ev), false);
             document.getElementById("select-add").addEventListener('click', ev => selectAddEvent(ev), false);
             return;
         }
+        console.log(addTitle);
+        addTitle.value = "";
         addModal.showModal();
     });
     return div;
@@ -84,10 +96,30 @@ document.getElementById("edit-modal-form").addEventListener("submit", async e =>
     }
 });
 
+document.getElementById("delete-modal-form").addEventListener("submit", async e => {
+    console.log("Delete!");
+    e.preventDefault();
+    let id = lastClick.id;
+    let formData = new FormData(e.target);
+    formData.append("id", id);
+    const data = Object.fromEntries(formData);
+    const res = await postData('/timetable', data, "DELETE");
+    if (res.error) {
+        alert(`Something went wrong: ${res.message}`);
+    } else if (res.success) {
+        // do things
+        deleteModal.hideModal();
+        document.getElementById(id).remove();
+    } else {
+        alert("Something went wrong. Please try again.");
+    }
+});
+
 document.getElementById("add-modal-form").addEventListener("submit", async e => {
     e.preventDefault();
     let id = lastClick.id;
-    if (!lastClick.id) {
+    
+    if (id.length == 24) { //it got the _id from DB
         id = lastClick.parentElement.id;
     }
 
@@ -131,8 +163,11 @@ divs.forEach(div => {
                 selectEditEvent(e, ev);
             }, false);
             document.getElementById("select-add").addEventListener('click', selectAddEvent, false);
+            document.getElementById("select-delete").addEventListener('click', ev => selectDeleteEvent(e, ev), false);
             return;
         }
+        console.log(addTitle);
+        addTitle.value = "";
         addModal.showModal();
     }, false);
 });

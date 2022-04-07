@@ -25,7 +25,6 @@ async function getNotes() {
 }
 
 const formatDate = (date) => {
-  console.log("date passed:", date);
   const str = date.toISOString().split("T");
   return `${str[0]} ${str[1].split(".")[0]}`;
 };

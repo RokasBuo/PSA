@@ -21,6 +21,7 @@ i {
 .title {
     margin: 0;
     display: inline-block;
+    padding-bottom: 20px;
 }
 
 .emoji {
@@ -83,6 +84,11 @@ input {
 .stilius{
     margin-top: 3%;
     width: 40%;
+}
+
+.budget-nice{
+    background-color: black;
+    color: white;
 }
 
 @media (max-width: 768px) {

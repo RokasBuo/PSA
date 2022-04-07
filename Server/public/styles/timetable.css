@@ -162,3 +162,7 @@
   flex-direction: column;
   cursor: pointer;
 }
+.week-names{
+  background-color: black;
+  color: white;
+}

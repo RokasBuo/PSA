@@ -14,9 +14,19 @@
     cursor: default; display: inline-block; padding: 5px 10px;
 }
 .jqpaginator .jqp-wrap .jqp-pages li.jqp-page,
-.jqpaginator .jqp-wrap button { cursor: pointer; }
+.jqpaginator .jqp-wrap button { 
+    cursor: pointer; 
+    background-color: black;
+    color: white;
+    border-radius: 15px;
+    margin: 8px;
+    padding: 10px;
+    border: 1px solid white;
+}
 .jqpaginator .jqp-wrap .jqp-pages li.jqp-active {
     cursor: default; font-weight: bold;
+    background-color: gray;
+    color: black;
 }
 .jqpaginator .jqp-wrap button .jqp-disable {
     color: #BBBBBB; cursor: default; pointer-events: none;

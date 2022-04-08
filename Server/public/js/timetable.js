@@ -42,9 +42,7 @@ function selectDeleteEvent(e, ev) {
 }
 
 function selectAddEvent(ev) {
-    console.log('add');
     addModal.showModal();
-    console.log(addTitle);
     addTitle.value = "";
     ev.target.removeEventListener('click', selectAddEvent);
 }
@@ -59,9 +57,9 @@ function generateEventDiv(data) {
         lastClick = e.target;
         if (e.target.classList.contains("event")) {
             selectionModal.showModal();
-            document.getElementById("select-edit").addEventListener('click', ev => selectEditEvent(e, ev), false);
-            document.getElementById("select-delete").addEventListener('click', ev => selectDeleteEvent(e, ev), false);
-            document.getElementById("select-add").addEventListener('click', ev => selectAddEvent(ev), false);
+            document.getElementById("select-edit").addEventListener('click', ev => selectEditEvent(e, ev));
+            document.getElementById("select-delete").addEventListener('click', ev => selectDeleteEvent(e, ev));
+            document.getElementById("select-add").addEventListener('click', ev => selectAddEvent(ev));
             return;
         }
         console.log(addTitle);
@@ -156,19 +154,19 @@ fetch("/timetable-list").then(res => res.json()).then(data => {
 divs.forEach(div => {
     div.addEventListener("click", e => {
         lastClick = e.target;
-        console.log(e.target, e.target.classList);
+        
         if (e.target.classList.contains("event")) {
             selectionModal.showModal();
-            document.getElementById("select-edit").addEventListener('click', ev => {
-                selectEditEvent(e, ev);
-            }, false);
-            document.getElementById("select-add").addEventListener('click', selectAddEvent, false);
-            document.getElementById("select-delete").addEventListener('click', ev => selectDeleteEvent(e, ev), false);
+            // document.getElementById("select-edit").addEventListener('click', ev => {
+            //     selectEditEvent(e, ev);
+            // });
+            // document.getElementById("select-add").addEventListener('click', selectAddEvent);
+            // document.getElementById("select-delete").addEventListener('click', ev => selectDeleteEvent(e, ev));
             return;
         }
-        console.log(addTitle);
+
         addTitle.value = "";
         addModal.showModal();
-    }, false);
+    });
 });
 

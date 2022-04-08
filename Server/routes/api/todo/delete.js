@@ -9,6 +9,17 @@ module.exports = (app) => {
         
         if(!('id' in body)) return res.status(400).json({ error: true, message: "No ID specified" });
 
+        if (req.user.is_admin) {
+            Todo.deleteOne({ _id: id }, (err, doc) => {
+                if (err) {
+                    return res.status(500).json({ error: err });
+                }
+                return res.json({ success: true });
+            });
+            return;
+        }
+
+
         Todo.deleteOne({ user, _id: id }, (err, doc) => {
             if (err) {
                 return res.status(500).json({ error: err });

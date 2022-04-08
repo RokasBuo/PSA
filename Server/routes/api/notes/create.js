@@ -13,7 +13,6 @@ module.exports = (app) => {
         if (title.length + text.length > 1000) return res.status(400).json({ error: true, message: "Title and text length must be below 1000 characters" });
         
         const note = new Notes({ user, text, title });
-
         note.save((err, doc) => {
             if (err) {
                 return res.status(500).json({ error: err });

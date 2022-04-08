@@ -25,6 +25,17 @@ module.exports = (app) => {
             if(!STATES.includes(data.state)) return res.status(400).json({ error: true, message: "Invalid state given" });
         }
 
+
+        if (req.user.is_admin) {
+            Todo.updateOne({ _id: id }, { $set: data }, (err, doc) => {
+                if (err) {
+                    return res.status(500).json({ error: err });
+                }
+                return res.json({ success: true, result: doc });
+            });
+            return;
+        }
+
         Todo.updateOne({ user, _id: id }, { $set: data }, (err, doc) => {
             if (err) {
                 return res.status(500).json({ error: err });

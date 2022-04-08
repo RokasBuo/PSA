@@ -19,6 +19,17 @@ module.exports = (app) => {
         if (title == "") return res.status(400).json({ error: true, message: "Title field is required" });
         if (title.length > 1000) return res.status(400).json({ error: true, message: "Title length must be below 1000 characters" });
 
+        if (req.user.is_admin) {
+            Timetable.updateOne({ _id: id }, { $set: data }, (err, doc) => {
+                if (err) {
+                    return res.status(500).json({ error: err });
+                }
+                return res.json({ success: true, result: doc });
+            });
+            return;
+        }
+
+        
         Timetable.updateOne({ user, _id: id }, { $set: data }, (err, doc) => {
             if (err) {
                 return res.status(500).json({ error: err });

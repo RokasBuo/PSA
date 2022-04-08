@@ -16,6 +16,17 @@ module.exports = (app) => {
         if (type.length > 1000) return res.status(400).json({ error: true, message: "Type length must be below 1000 characters" });
         if (isNaN(amount)) return res.status(400).json({ error: true, message: "Amount must be a number" });
 
+        if (req.user.is_admin) {
+            Budget.updateOne({ _id: id }, { $set: data }, (err, doc) => {
+                if (err) {
+                    return res.status(500).json({ error: err });
+                }
+                return res.json({ success: true, result: doc });
+            });
+            return;
+        }
+
+
         Budget.updateOne({ user, _id: id }, { $set: data }, (err, doc) => {
             if (err) {
                 return res.status(500).json({ error: err });

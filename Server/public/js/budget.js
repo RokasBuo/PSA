@@ -72,6 +72,25 @@ const formatDate = (date) => {
     return `${str[0]} ${str[1].split(".")[0]}`;
 };
 
+async function delete_history(id, el) {
+    console.log(id, el);
+    const confirmation = confirm("Are you sure you want to delete? This action is permanent.");
+    if(!confirmation) return;
+    const res = await fetch("/budget", {
+        method: "DELETE",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id: id })
+    }).then(res => res.json());
+    console.log(el);
+    if (res.success) {
+        el.parentElement.parentElement.remove();
+        data = data.filter(d => d._id != id);
+        create(data, true);
+    }
+}
+
 function addRowToContainer(data) {
     const html = `<tr>
         <td>
@@ -97,6 +116,9 @@ function addRowToContainer(data) {
         </td>
         <td>
             ${formatDate(new Date(data.date))}
+        </td>
+        <td>
+            <button class="delete-button" onclick="delete_history('${data._id}', this)"><i class="fa fa-trash text-muted"></i></button>
         </td>
     </tr>`;
     historyContainer.innerHTML += html;

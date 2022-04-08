@@ -3,7 +3,6 @@ const xssFilters = require('xss-filters');
 
 module.exports = (app) => {
     app.patch('/timetable', (req, res) => {
-        console.log("updating!");
         if (!req.user) return res.status(401).json({ error: true, message: "You must be logged in" });
         const body = req.body;
         const user = req.user._id;

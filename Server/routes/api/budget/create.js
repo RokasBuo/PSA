@@ -14,7 +14,7 @@ module.exports = (app) => {
             data[key] = Number(body[key]);
         }
         const budget = new Budget(data);
-
+        // allow deleting rows in client side
         budget.save((err, doc) => {
             if (err) {
                 return res.status(500).json({ error: err });

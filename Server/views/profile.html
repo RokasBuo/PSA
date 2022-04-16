@@ -2,6 +2,7 @@
 
 <head>
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/profile.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -10,9 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital@1&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/1b20b6c512.js" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="js/localStorage.js"></script>
-    <script type="text/javascript" src="js/modal.js" defer></script>
-    <script type="text/javascript" src="js/calculator.js" defer></script>
+    <script src="js/dashboard.js" defer type="text/javascript"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
@@ -40,53 +39,27 @@
     </div>
     <div class="content">
         <div class="page-name ">
-            <h1>Calculator</h1>
-        </div>
-        <h1 id="answer"></h1>
-        <div class="content-text">
-            <form method="post" action="#">
-                <input type="text" placeholder="Calculate" name="input" id="calculator" class="calc-input-style">
-            </form>
-        </div>
-        <h2>History</h2>
-        <div class="history-table">
-            <div class="pagination">
-                <button id="previousPage" class="paginationBttn"><i class="fas fa-chevron-left"></i> Back</button>
-                <div id="pageNum">
-                </div>
-                <button id="nextPage" class="paginationBttn">Next <i class="fas fa-chevron-right"></i></button>
-            </div>
-            <div class="wrapper">
-                <table class="table-bordered">
-
-                    <tbody>
-                        <tr>
-                            <td data-label="Input: ">No calculations yet...</td>
-                        </tr>
-
-                    </tbody>
-                </table>
-            </div>
+            <h1>Profile</h1>
         </div>
 
+        <div class="inputs">
+            <p>Current password</p>
+            <input type="password" required name="password" id="password" class="password" required placeholder="Password"><br>
+            <p>New password</p>
+            <input type="password" required name="password" id="password" class="password" required placeholder="Password"><br>
+            <p>Repeat password</p>
+            <input type="password" required name="password" id="password" class="password" required placeholder="Password"><br>
+           <div class="buttonas">
+            <input type="submit" value="Log In" class="submit"><br>
+           </div>
+           <p>Log in as Admin:</p>
+           
+            <a href=""><i class="fas fa-user-cog admin-style"></i></a>
+           
+        </div>
+        
     </div>
-    <div id="modal" class="modal">
 
-        <!-- Modal content -->
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <div style="text-align:center;">
-                <h1>Warning!</h1>
-                <p>Do not paste contents into this calculator if you're not absolutely sure what it does.</p>
-                <p>Malicious people may attempt to trick you into running malicious code that would compromise your
-                    computer.</p>
-            </div>
-            <button type="button" class="button" id="ok">OK</button>
-            <button type="button" class="button float-right button-red" id="today">Dont warn me today</button>
-            <button type="button" class="button float-right button-red" id="never">Never warn me</button>
-        </div>
-
-    </div>
 </body>
 
 </html>

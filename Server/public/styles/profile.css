@@ -1,0 +1,42 @@
+.inputs{
+    margin-top: 100px;
+    padding: 70px;
+    border: 3px solid black;
+    border-radius: 15px;
+}
+p{
+    font-weight:bold;
+    font-size: 20px;
+}
+.submit{
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 15px;
+    background-color: black;
+    color:white;
+    border: 3px solid black;
+    font-size: 15px;
+    margin-bottom: 30px;
+}
+
+.submit:hover{
+    background-color: white;
+    color:black;
+    cursor: pointer;
+}
+
+.password{
+    padding: 10px;
+    width: 300px;
+    border-radius: 15px;
+}
+
+.buttonas{
+    text-align: center;
+}
+
+.admin-style{
+    font-size: 40px;
+    color: black;
+    
+}

@@ -41,25 +41,61 @@
         <div class="page-name ">
             <h1>Profile</h1>
         </div>
-
+        <p style="color: red; display: none;" id="error"></p>
+        <p style="color: green; display: none;" id="success"></p>
         <div class="inputs">
-            <p>Current password</p>
-            <input type="password" required name="password" id="password" class="password" required placeholder="Password"><br>
-            <p>New password</p>
-            <input type="password" required name="password" id="password" class="password" required placeholder="Password"><br>
-            <p>Repeat password</p>
-            <input type="password" required name="password" id="password" class="password" required placeholder="Password"><br>
-           <div class="buttonas">
-            <input type="submit" value="Log In" class="submit"><br>
-           </div>
-           <p>Log in as Admin:</p>
-           
+
+            <form method="POST" action="/users/change-pass">
+                <p>Current password</p>
+                <input type="password" required name="oldpassword" id="password" class="password" required
+                    placeholder="Password"><br>
+                <p>New password</p>
+                <input type="password" required name="newpassword" id="password" class="password" required
+                    placeholder="Password"><br>
+                <p>Repeat password</p>
+                <input type="password" required name="repeatpassword" id="password" class="password" required
+                    placeholder="Password"><br>
+                <div class="buttonas">
+                    <input type="submit" value="Change password" class="submit"><br>
+                </div>
+            </form>
+            <p>Log in as Admin:</p>
+
             <a href=""><i class="fas fa-user-cog admin-style"></i></a>
-           
+
         </div>
-        
+
     </div>
 
 </body>
+<script>
+    const error_text = document.getElementById('error');
+    const success_text = document.getElementById('success');
+    document.querySelector("form").addEventListener("submit", async e => {
+        e.preventDefault();
+        error_text.style.display = "none";
+        success_text.style.display = "none";
+        const formData = new FormData(e.target);
+        const object = {};
+        formData.forEach((value, key) => object[key] = value);
+        const res = await fetch("/users/change-pass", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(object),
+        }).then(res => res.json()).catch(err => {
+            error_text.innerHTML = err.message;
+            error_text.style.display = "block";
+        });
+        if (res.error) {
+            error_text.innerHTML = res.message;
+            error_text.style.display = "block";
+            return;
+        }
+        success.innerHTML = res.message;
+        success.style.display = "block";
+    });
+</script>
 
 </html>

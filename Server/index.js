@@ -9,23 +9,23 @@ const { loadQuotes } = require('./utils/helpers');
 const fs = require('fs');
 require('./utils/auth');
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 global.appRoot = path.resolve(__dirname);
 
-// TODO: set session secret
 app.use(session({
     resave: false,
     saveUninitialized: false,
-    secret: 'SECRET'
+    secret: 'Sj2ttMKZqT8f67u.5fez1f1fNoSpk1vxWpsahlC6DQHj9i'
 }));
 
 app.use(passport.initialize());
 app.use(passport.session());
 
 function processRoutePath(route_path) {
-    fs.readdirSync(route_path).forEach(function(file) {
+    fs.readdirSync(route_path).forEach(function (file) {
         var filepath = route_path + '/' + file;
-        fs.stat(filepath, function(err,stat) {
+        fs.stat(filepath, function (err, stat) {
             if (stat.isDirectory()) {
                 processRoutePath(filepath);
             } else {

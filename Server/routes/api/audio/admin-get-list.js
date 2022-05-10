@@ -1,7 +1,7 @@
 const model = require('../../../models/audio');
 
 module.exports = function (app) {
-    app.get("/admin/audio-memos", async (req, res) => {
+    app.get("/admin/audio-list", async (req, res) => {
         if (!req.user) return res.status(401).json({ error: true, message: "You must be logged in" });
         if (!req.user.is_admin) return res.status(401).json({ error: true, message: "You don't have permission to view this" });
         model.find({}).then((doc, err) => {

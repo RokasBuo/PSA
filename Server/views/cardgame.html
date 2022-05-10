@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital@1&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/1b20b6c512.js" crossorigin="anonymous"></script>
-    <script src="js/dashboard.js" defer type="text/javascript"></script>
+    <script src="js/cards.js" defer type="text/javascript"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
@@ -40,7 +40,22 @@
         <div class="page-name ">
             <h1>Card Game</h1>
         </div>
-       
+        <div id="questions" style="display:none;">
+            <h2 id="question"></h2>
+            <label for="answer">Answer</label>
+            <input type="text" class="form-control" id="answer-input">
+            <button type="button" class="btn answer-btn" id="answer-btn">Answer</button>
+        </div>
+        <div id="groups"></div>
+        <form method="post" id="form" action="/cards" style="margin-top: 100px;">
+            <label for="group">Group</label><br/>
+            <input type="text" class="form-control" name="group"><br/>
+            <label for="question">Question</label><br/>
+            <input type="text" class="form-control" name="question"><br/>
+            <label for="answer">Answer</label><br/>
+            <input type="text" class="form-control" name="answer"><br/>
+            <button type="submit" class="btn add-card-btn">Add card</button>
+        </form>
     </div>
 
 </body>

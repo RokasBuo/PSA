@@ -4,12 +4,18 @@ const question_container = document.getElementById("questions");
 const question_el = document.getElementById("question");
 const answer_el = document.getElementById("answer-input");
 const answer_btn = document.getElementById("answer-btn");
-const QUESTIONNAIRE = {};
-
+const QUESTIONNAIRE = {
+    all_questions: {},
+};
+const formatDate = (date) => {
+    if (typeof date != Date) date = new Date(date);
+    const str = date.toISOString().split("T");
+    return `${str[0]} ${str[1].split(".")[0]}`;
+};
 answer_btn.addEventListener("click", e => {
     console.log("YES!");
     const value = answer_el.value.trim();
-    if(value != QUESTIONNAIRE.answer) {
+    if (value != QUESTIONNAIRE.answer) {
         alert("INCORRECT! Correct answer: " + QUESTIONNAIRE.answer);
     } else {
         alert("correct");
@@ -17,8 +23,26 @@ answer_btn.addEventListener("click", e => {
     showNextQuestion();
 });
 
+
+async function deleteQuestion(id, group, e) {
+    const response = await fetch("/card", {
+        method: "DELETE",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id }),
+    }).then(response => response.json()).catch(err => alert(err.message));
+    if (response.error) {
+        return alert(reponse.message);
+    }
+    console.log(QUESTIONNAIRE, QUESTIONNAIRE.all_questions[group], id);
+    QUESTIONNAIRE.all_questions[group] = QUESTIONNAIRE.all_questions[group].filter(q => q._id != id);
+    showNextQuestion();
+}
+
+
 const showNextQuestion = function () {
-    if(QUESTIONNAIRE.questions.length == 0) {
+    if (QUESTIONNAIRE.questions.length == 0) {
         groupBttns.style.display = "block";
         question_container.style.display = "none";
         alert("all done!");
@@ -28,8 +52,22 @@ const showNextQuestion = function () {
     const obj = QUESTIONNAIRE.questions.pop();
     const answer = obj.answer;
     const question = obj.question;
+    console.log(obj);
     QUESTIONNAIRE.answer = answer;
-    question_el.innerHTML = question;
+    question_el.innerHTML = `
+    <div id="${obj._id}" class="d-inline-block card mb-3" style="width: 18rem; border-radius: 30px; margin-right: 2rem;"><div class="card-body">
+        <h5 class="card-title" id="note-title" contenteditable="true">${question}</h5>
+    </div>
+    <div class="card-footer text-muted">
+        <div class="d-inline-block">
+            ${formatDate(obj.date)}
+        </div>
+        <div style="float:right; margin-top: -5px">
+            <button class="btn" id="btn-delete" onclick="deleteQuestion('${obj._id}', '${obj.group}', this)"><i class="fa fa-trash text-muted" aria-hidden="true"></i></button>
+        </div>
+    </div>
+    
+    `;
 };
 
 
@@ -39,9 +77,7 @@ const addGroupButton = (name, group) => {
     console.log("PARSING:", group);
     btn.innerHTML = name;
     btn.addEventListener("click", async e => {
-        QUESTIONNAIRE.questions = group.map(g => {
-            return { question: g.question, answer: g.answer };
-        });
+        QUESTIONNAIRE.questions = QUESTIONNAIRE.all_questions[name];
         groupBttns.style.display = "none";
         question_container.style.display = "block";
         showNextQuestion();
@@ -58,6 +94,10 @@ fetch("/card-list").then(res => res.json()).then(data => {
             groups[item.group] = [];
         }
         groups[item.group].push(item);
+        if (!QUESTIONNAIRE.all_questions[item.group]) {
+            QUESTIONNAIRE.all_questions[item.group] = [];
+        }
+        QUESTIONNAIRE.all_questions[item.group].push(item);
     });
 
     console.log(groups);
@@ -65,7 +105,7 @@ fetch("/card-list").then(res => res.json()).then(data => {
     Object.keys(groups).forEach(group => {
         addGroupButton(group, groups[group]);
     });
-}).catch(err => { alert(err.message); });
+}).catch(err => { alert("uh oh:" + err.message); });
 
 
 form.addEventListener("submit", async (e) => {
@@ -84,6 +124,10 @@ form.addEventListener("submit", async (e) => {
     }
     console.log(response);
 
-    // TODO: re-render group buttons, this results in duplcate useless buttons.
-    addGroupButton(response.result.group, response.result);
+    if (!QUESTIONNAIRE.all_questions[response.result.group]) {
+        QUESTIONNAIRE.all_questions[response.result.group] = [];
+        // only add button if doesn't exist
+        addGroupButton(response.result.group, response.result);
+    }
+    QUESTIONNAIRE.all_questions[response.result.group].push(response.result);
 });

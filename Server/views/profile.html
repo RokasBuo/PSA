@@ -24,11 +24,11 @@
             <li class="nav-item"><a href="/todo"><i class="fas fa-clipboard-list"></i></a></li>
             <li class="nav-item"><a href="/calculator"><i class="fas fa-calculator"></i></a></li>
             <li class="nav-item"><a href="/clock"><i class="fas fa-clock"></i></a></li>
-            <li class="nav-item"><a href="/game"><i class="fas fa-gamepad"></i></a></li>
             <li class="nav-item"><a href="/timetable"><i class="fas fa-calendar"></i></a></li>
             <li class="nav-item"><a href="/budget"><i class="fas fa-money-bill"></i></a></li>
             <li class="nav-item"><a href="/audio"><i class="fas fa-music"></i></a></li>
             <li class="nav-item"><a href="/cardgame"><i class="fas fa-brain"></i></a></li>
+            <li class="nav-item"><a href="/admin"><i class="fas fa-user-cog"></i></a></li>
         </ul>
 
         <ul class="nav-list-bottom">
@@ -46,6 +46,9 @@
         <div class="inputs">
 
             <form method="POST" action="/users/change-pass">
+                <p>User Name</p>
+                <input type="text" required name="username" id="username" class="password" required
+                    placeholder="User Name"><br>
                 <p>Current password</p>
                 <input type="password" required name="oldpassword" id="password" class="password" required
                     placeholder="Password"><br>
@@ -59,9 +62,6 @@
                     <input type="submit" value="Change password" class="submit"><br>
                 </div>
             </form>
-            <p>Log in as Admin:</p>
-
-            <a href="/admin"><i class="fas fa-user-cog admin-style"></i></a>
 
         </div>
 

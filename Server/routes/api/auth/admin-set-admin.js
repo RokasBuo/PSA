@@ -11,6 +11,5 @@ module.exports = (app) => {
         } catch (err) {
             return res.status(400).json({ error: true, message: err.message });
         }
-
     });
 };

@@ -11,7 +11,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital@1&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/1b20b6c512.js" crossorigin="anonymous"></script>
-    <script src="js/dashboard.js" defer type="text/javascript"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
@@ -45,18 +44,18 @@
         <p style="color: green; display: none;" id="success"></p>
         <div class="inputs">
 
-            <form method="POST" action="/users/change-pass">
+            <form method="POST" autocomplete="off" action="/users/change-pass">
                 <p>User Name</p>
-                <input type="text" required name="username" id="username" class="password" required
+                <input type="text" name="username" id="username" class="password"
                     placeholder="User Name"><br>
                 <p>Current password</p>
-                <input type="password" required name="oldpassword" id="password" class="password" required
+                <input type="password" name="oldpassword" id="password" class="password"
                     placeholder="Password"><br>
                 <p>New password</p>
-                <input type="password" required name="newpassword" id="password" class="password" required
+                <input type="password" name="newpassword" id="password" class="password"
                     placeholder="Password"><br>
                 <p>Repeat password</p>
-                <input type="password" required name="repeatpassword" id="password" class="password" required
+                <input type="password" name="repeatpassword" id="password" class="password"
                     placeholder="Password"><br>
                 <div class="buttonas">
                     <input type="submit" value="Change password" class="submit"><br>
@@ -69,15 +68,26 @@
 
 </body>
 <script>
+    const form = document.querySelector('form');
+    // remove annoying autofill
+    [...form].forEach(field => {
+        field.setAttribute('readonly', true)
+        field.onclick = () => { field.removeAttribute('readonly') };
+    });
+
     const error_text = document.getElementById('error');
     const success_text = document.getElementById('success');
-    document.querySelector("form").addEventListener("submit", async e => {
+    form.addEventListener("submit", async e => {
         e.preventDefault();
         error_text.style.display = "none";
         success_text.style.display = "none";
         const formData = new FormData(e.target);
         const object = {};
-        formData.forEach((value, key) => object[key] = value);
+        formData.forEach((value, key) => {
+            if(value.length > 0) {
+                return object[key] = value;
+            }
+        });
         const res = await fetch("/users/change-pass", {
             method: "POST",
             headers: {

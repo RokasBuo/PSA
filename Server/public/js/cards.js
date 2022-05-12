@@ -6,7 +6,9 @@ const answer_el = document.getElementById("answer-input");
 const answer_btn = document.getElementById("answer-btn");
 const QUESTIONNAIRE = {
     all_questions: {},
+    index: 0,
 };
+let r = 0;
 const formatDate = (date) => {
     if (typeof date != Date) date = new Date(date);
     const str = date.toISOString().split("T");
@@ -18,7 +20,7 @@ answer_btn.addEventListener("click", e => {
     if (value != QUESTIONNAIRE.answer) {
         alert("INCORRECT! Correct answer: " + QUESTIONNAIRE.answer);
     } else {
-        alert("correct");
+        alert(`correct`);
     }
     showNextQuestion();
 });
@@ -37,19 +39,24 @@ async function deleteQuestion(id, group, e) {
     }
     console.log(QUESTIONNAIRE, QUESTIONNAIRE.all_questions[group], id);
     QUESTIONNAIRE.all_questions[group] = QUESTIONNAIRE.all_questions[group].filter(q => q._id != id);
+    if (QUESTIONNAIRE.all_questions[group].length === 0) {
+        document.getElementById(`groupbtn-${group}`).remove(); // remove buttons of empty groups.
+    }
     showNextQuestion();
 }
 
 
 const showNextQuestion = function () {
-    if (QUESTIONNAIRE.questions.length == 0) {
+    const index = QUESTIONNAIRE.index;
+    if (QUESTIONNAIRE.questions.length < index + 1) {
+        console.log("LOWER", QUESTIONNAIRE.questions.length, index + 1);
         groupBttns.style.display = "block";
         question_container.style.display = "none";
-        alert("all done!");
+        alert(`all done!`);
         return;
     }
     answer_el.value = "";
-    const obj = QUESTIONNAIRE.questions.pop();
+    const obj = QUESTIONNAIRE.questions[index];
     const answer = obj.answer;
     const question = obj.question;
     console.log(obj);
@@ -68,6 +75,7 @@ const showNextQuestion = function () {
     </div>
     
     `;
+    QUESTIONNAIRE.index++;
 };
 
 
@@ -76,7 +84,9 @@ const addGroupButton = (name, group) => {
     btn.classList.add("btn", "group-btn");
     console.log("PARSING:", group);
     btn.innerHTML = name;
+    btn.id = `groupbtn-${name}`;
     btn.addEventListener("click", async e => {
+        QUESTIONNAIRE.index = 0;
         QUESTIONNAIRE.questions = QUESTIONNAIRE.all_questions[name];
         groupBttns.style.display = "none";
         question_container.style.display = "block";
@@ -126,6 +136,10 @@ form.addEventListener("submit", async (e) => {
 
     if (!QUESTIONNAIRE.all_questions[response.result.group]) {
         QUESTIONNAIRE.all_questions[response.result.group] = [];
+    }
+    // since empty question group buttons are removed we need to recreate it.
+    // if above returns FALSE if the group exists but is empty (e.g. after deleting the last question in a group)
+    if (QUESTIONNAIRE.all_questions[response.result.group].length == 0) {
         // only add button if doesn't exist
         addGroupButton(response.result.group, response.result);
     }

@@ -62,7 +62,7 @@ const showNextQuestion = function () {
     console.log(obj);
     QUESTIONNAIRE.answer = answer;
     question_el.innerHTML = `
-    <div id="${obj._id}" class="d-inline-block card mb-3" style="width: 18rem; border-radius: 30px; margin-right: 2rem;"><div class="card-body">
+    <div id="${obj._id}" class="d-inline-block card mb-3 hello" style="width: 18rem; border-radius: 30px; margin-right: 2rem;"><div class="card-body">
         <h5 class="card-title" id="note-title" contenteditable="true">${question}</h5>
     </div>
     <div class="card-footer text-muted">

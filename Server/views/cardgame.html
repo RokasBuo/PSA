@@ -28,7 +28,6 @@
             <li class="nav-item"><a href="/budget"><i class="fas fa-money-bill"></i></a></li>
             <li class="nav-item"><a href="/audio"><i class="fas fa-music"></i></a></li>
             <li class="nav-item"><a href="/cardgame"><i class="fas fa-brain"></i></a></li>
-            <li class="nav-item"><a href="/admin"><i class="fas fa-user-cog"></i></a></li>
         </ul>
 
         <ul class="nav-list-bottom">
@@ -49,16 +48,22 @@
         </div>
         <div id="groups"></div>
         <form method="post" id="form" action="/cards" style="margin-top: 100px;">
-            <label for="group">Group</label><br/>
-            <input type="text" class="form-control inputs" name="group"><br/>
-            <label for="question">Question</label><br/>
-            <input type="text" class="form-control inputs" name="question"><br/>
-            <label for="answer">Answer</label><br/>
-            <input type="text" class="form-control inputs" name="answer"><br/>
+            <label for="group">Group</label><br />
+            <input type="text" class="form-control inputs" name="group"><br />
+            <label for="question">Question</label><br />
+            <input type="text" class="form-control inputs" name="question"><br />
+            <label for="answer">Answer</label><br />
+            <input type="text" class="form-control inputs" name="answer"><br />
             <button type="submit" class="btn add-card-btn butonas">Add card</button>
         </form>
     </div>
 
 </body>
+<script>
+    fetch("/me").then(res => res.json()).then(data => {
+        if (!data.is_admin) return;
+        document.querySelector('.nav-list').innerHTML += `<li class="nav-item" id="admin-link"><a href="/admin"><i class="fas fa-user-cog"></i></a></li>`;
+    })
+</script>
 
 </html>

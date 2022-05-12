@@ -28,7 +28,6 @@
             <li class="nav-item"><a href="/budget"><i class="fas fa-money-bill"></i></a></li>
             <li class="nav-item"><a href="/audio"><i class="fas fa-music"></i></a></li>
             <li class="nav-item"><a href="/cardgame"><i class="fas fa-brain"></i></a></li>
-            <li class="nav-item"><a href="/admin"><i class="fas fa-user-cog"></i></a></li>
         </ul>
 
         <ul class="nav-list-bottom">
@@ -69,5 +68,11 @@
     </div>
 
 </body>
+<script>
+    fetch("/me").then(res => res.json()).then(data => {
+        if (!data.is_admin) return;
+        document.querySelector('.nav-list').innerHTML += `<li class="nav-item" id="admin-link"><a href="/admin"><i class="fas fa-user-cog"></i></a></li>`;
+    })
+</script>
 
 </html>

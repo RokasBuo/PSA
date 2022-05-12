@@ -27,7 +27,6 @@
             <li class="nav-item"><a href="/budget"><i class="fas fa-money-bill"></i></a></li>
             <li class="nav-item"><a href="/audio"><i class="fas fa-music"></i></a></li>
             <li class="nav-item"><a href="/cardgame"><i class="fas fa-brain"></i></a></li>
-            <li class="nav-item"><a href="/admin"><i class="fas fa-user-cog"></i></a></li>
         </ul>
 
         <ul class="nav-list-bottom">
@@ -46,17 +45,13 @@
 
             <form method="POST" autocomplete="off" action="/users/change-pass">
                 <p>User Name</p>
-                <input type="text" name="username" id="username" class="password"
-                    placeholder="User Name"><br>
+                <input type="text" name="username" id="username" class="password" placeholder="User Name"><br>
                 <p>Current password</p>
-                <input type="password" name="oldpassword" id="password" class="password"
-                    placeholder="Password"><br>
+                <input type="password" name="oldpassword" id="password" class="password" placeholder="Password"><br>
                 <p>New password</p>
-                <input type="password" name="newpassword" id="password" class="password"
-                    placeholder="Password"><br>
+                <input type="password" name="newpassword" id="password" class="password" placeholder="Password"><br>
                 <p>Repeat password</p>
-                <input type="password" name="repeatpassword" id="password" class="password"
-                    placeholder="Password"><br>
+                <input type="password" name="repeatpassword" id="password" class="password" placeholder="Password"><br>
                 <div class="buttonas">
                     <input type="submit" value="Change password" class="submit"><br>
                 </div>
@@ -67,6 +62,12 @@
     </div>
 
 </body>
+<script>
+    fetch("/me").then(res => res.json()).then(data => {
+        if (!data.is_admin) return;
+        document.querySelector('.nav-list').innerHTML += `<li class="nav-item" id="admin-link"><a href="/admin"><i class="fas fa-user-cog"></i></a></li>`;
+    })
+</script>
 <script>
     const form = document.querySelector('form');
     // remove annoying autofill
@@ -84,7 +85,7 @@
         const formData = new FormData(e.target);
         const object = {};
         formData.forEach((value, key) => {
-            if(value.length > 0) {
+            if (value.length > 0) {
                 return object[key] = value;
             }
         });

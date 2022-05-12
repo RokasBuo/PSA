@@ -20,7 +20,7 @@ answer_btn.addEventListener("click", e => {
     if (value != QUESTIONNAIRE.answer) {
         alert("INCORRECT! Correct answer: " + QUESTIONNAIRE.answer);
     } else {
-        alert(`correct ${r++}`);
+        alert(`correct`);
     }
     showNextQuestion();
 });
@@ -52,7 +52,7 @@ const showNextQuestion = function () {
         console.log("LOWER", QUESTIONNAIRE.questions.length, index + 1);
         groupBttns.style.display = "block";
         question_container.style.display = "none";
-        alert(`all done! ${r++}`);
+        alert(`all done!`);
         return;
     }
     answer_el.value = "";

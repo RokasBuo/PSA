@@ -39,7 +39,7 @@ async function deleteQuestion(id, group, e) {
     }
     console.log(QUESTIONNAIRE, QUESTIONNAIRE.all_questions[group], id);
     QUESTIONNAIRE.all_questions[group] = QUESTIONNAIRE.all_questions[group].filter(q => q._id != id);
-    if(QUESTIONNAIRE.all_questions[group].length === 0) {
+    if (QUESTIONNAIRE.all_questions[group].length === 0) {
         document.getElementById(`groupbtn-${group}`).remove(); // remove buttons of empty groups.
     }
     showNextQuestion();
@@ -48,8 +48,8 @@ async function deleteQuestion(id, group, e) {
 
 const showNextQuestion = function () {
     const index = QUESTIONNAIRE.index;
-    if (QUESTIONNAIRE.questions.length < index+1) {
-        console.log("LOWER", QUESTIONNAIRE.questions.length, index+1);
+    if (QUESTIONNAIRE.questions.length < index + 1) {
+        console.log("LOWER", QUESTIONNAIRE.questions.length, index + 1);
         groupBttns.style.display = "block";
         question_container.style.display = "none";
         alert(`all done! ${r++}`);
@@ -136,6 +136,10 @@ form.addEventListener("submit", async (e) => {
 
     if (!QUESTIONNAIRE.all_questions[response.result.group]) {
         QUESTIONNAIRE.all_questions[response.result.group] = [];
+    }
+    // since empty question group buttons are removed we need to recreate it.
+    // if above returns FALSE if the group exists but is empty (e.g. after deleting the last question in a group)
+    if (QUESTIONNAIRE.all_questions[response.result.group].length == 0) {
         // only add button if doesn't exist
         addGroupButton(response.result.group, response.result);
     }

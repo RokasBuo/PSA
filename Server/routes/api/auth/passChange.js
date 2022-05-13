@@ -24,15 +24,22 @@ module.exports = function (app) {
             if (body.newpassword.length == 0 || body.oldpassword.length == 0) {
                 return res.status(400).json({ error: true, message: "Please fill in all password fields." });
             }
+            if (body.newpassword.length > 1000) {
+                return res.status(400).json({ error: true, message: "Password is too long." });
+            }
         }
         const uid = req.user._id;
         const user = await User.findById(uid);
         console.log(user);
         if (body.username != null) {
             const username = xssFilters.inHTMLData(body.username);
-            if (username.length > 0) {
-                UPDATE.username = username;
+            if (username.length == 0) {
+                return res.status(400).json({ error: true, message: "Username is invalid." });
             }
+            if(username.length > 1000) {
+                return res.status(400).json({ error: true, message: "Username is too long." });
+            }
+            UPDATE.username = username;
         }
 
 
